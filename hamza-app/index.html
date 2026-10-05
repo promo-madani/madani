@@ -1,84 +1,137 @@
 <!doctype html>
-<html lang="en">
+<html lang="ur" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="description" content="All Hamza Islahi Cartoon videos from YouTube, Facebook, TikTok and Instagram in one app." />
-  <meta name="theme-color" content="#0f7a4f" />
+  <meta name="description" content="Hamza Islahi Cartoon – all Hamza videos from YouTube, Facebook, TikTok and Instagram in one app." />
+  <meta name="theme-color" content="#0f6b66" />
   <title>Hamza Islahi Cartoon</title>
   <link rel="manifest" href="manifest.json" />
   <link rel="icon" href="assets/icon-192.png" type="image/png" />
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;600;700&family=Noto+Nastaliq+Urdu:wght@600;700&display=swap" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="phone">
+  <div class="phone" id="phone" data-view="home">
+
+    <!-- Splash -->
+    <div class="overlay splash" id="splash" aria-hidden="true">
+      <img class="emblem" src="assets/splash-emblem.webp" alt="" />
+      <img class="splash-hamza" src="assets/splash-hamza.webp" alt="" />
+      <img class="splash-title" src="assets/splash-title.webp" alt="حمزہ اصلاحی کارٹون" />
+    </div>
+
+    <!-- Welcome (first launch) -->
+    <div class="overlay welcome" id="welcome" hidden>
+      <img class="welcome-hamza" src="assets/welcome-hamza.webp" alt="حمزہ" />
+      <div class="welcome-body">
+        <img class="welcome-title" src="assets/welcome-title.webp" alt="حمزہ کارٹون" />
+        <p class="tagline">اچھی باتیں، خوبصورت کہانیاں، بہترین تربیت</p>
+        <button class="pill" id="startBtn">شروع کریں</button>
+        <button class="text-link" id="welcomeSkip">کارٹون دیکھیں</button>
+      </div>
+    </div>
+
+    <!-- Onboarding (first launch) -->
+    <div class="overlay onboarding" id="onboarding" hidden>
+      <button class="text-link skip" id="onbSkip">چھوڑیں</button>
+      <div class="slides" id="slides"></div>
+      <div class="onb-footer">
+        <div class="dots" id="dots" role="tablist" aria-label="تعارف"></div>
+        <button class="pill" id="onbNext">آگے بڑھیں</button>
+      </div>
+    </div>
+
+    <!-- Top bar for inner screens (Home has its own header) -->
     <header class="topbar">
-      <div class="brand"><img src="assets/icon-192.png" alt="" width="40" height="40" /><div><b>Hamza Islahi</b><small>Cartoon</small></div></div>
-      <button class="icon-btn" id="installBtn" hidden>⬇ Install</button>
+      <button class="back" id="backBtn" aria-label="واپس">→</button>
+      <h1 id="topTitle">حمزہ اصلاحی کارٹون</h1>
+      <img src="assets/icon-192.png" alt="" width="36" height="36" />
     </header>
 
     <main id="screen">
       <!-- Home -->
       <section class="view active" data-view="home">
-        <div class="welcome">
-          <picture><source srcset="assets/hamza.webp" type="image/webp" /><img src="assets/hamza.jpg" alt="Hamza" width="400" height="860" /></picture>
-          <div>
-            <b>Assalam-o-Alaikum! 👋</b>
-            <p>Main Hamza hoon. Aao mere saath achhi baaten seekhen!</p>
-            <p class="ur" lang="ur" dir="rtl">السلام علیکم! میں حمزہ ہوں</p>
+        <div class="home-head">
+          <div class="brand-row">
+            <div class="brand-text">
+              <span class="brand-ur">حمزہ</span>
+              <span class="brand-en">Hamza <small>Islahi Cartoon</small></span>
+            </div>
+            <img class="brand-avatar" src="assets/icon-192.png" alt="" width="58" height="58" />
           </div>
+          <div class="hero" id="hero" role="button" tabindex="0"></div>
         </div>
-        <div class="hero" id="hero" role="button" tabindex="0"></div>
-        <div class="chips" id="platformChips"></div>
-        <h2 class="section-title">Categories</h2>
-        <div class="cats" id="categoryList"></div>
-        <div class="row-title"><h2 class="section-title" id="feedTitle">All Videos</h2><button class="link" id="clearCat" hidden>Clear ✕</button></div>
-        <div class="grid" id="feed"></div>
-        <h2 class="section-title">Follow Hamza Cartoon World</h2>
-        <div class="socials" id="socials"></div>
+        <div class="chips" id="platformChips" role="toolbar" aria-label="پلیٹ فارم"></div>
+        <div id="rows"></div>
+        <section class="follow">
+          <h2>ہمیں فالو کریں</h2>
+          <div class="socials" id="socials"></div>
+        </section>
       </section>
 
       <!-- Search -->
       <section class="view" data-view="search">
-        <input class="search" id="searchInput" type="search" placeholder="Search videos… (e.g. chori, norway)" aria-label="Search videos" autocomplete="off" />
+        <input class="search" id="searchInput" type="search" placeholder="ویڈیو تلاش کریں… (مثلاً چوری، ناروے)" aria-label="ویڈیو تلاش کریں" autocomplete="off" />
         <div class="grid" id="searchResults"></div>
       </section>
 
       <!-- Favorites -->
       <section class="view" data-view="favorites">
-        <h2 class="section-title">My Favorites ⭐</h2>
         <div class="grid" id="favList"></div>
+      </section>
+
+      <!-- Profile -->
+      <section class="view" data-view="profile">
+        <div class="profile-card">
+          <img src="assets/icon-512.png" alt="" width="96" height="96" />
+          <h2>حمزہ اصلاحی کارٹون</h2>
+          <p>اچھی باتیں، خوبصورت کہانیاں، بہترین تربیت</p>
+        </div>
+        <h2 class="section-title">ہمیں فالو کریں</h2>
+        <div class="socials" id="profileSocials"></div>
+        <div class="menu">
+          <button id="installBtn" hidden>📲 ایپ فون پر انسٹال کریں</button>
+          <button id="replayIntro">🎬 تعارف دوبارہ دیکھیں</button>
+          <button id="openAdmin">➕ ویڈیو شامل کریں <small>(ٹیم کے لیے)</small></button>
+        </div>
+        <p class="version">پروٹوٹائپ ورژن · Hamza Islahi Cartoon</p>
       </section>
 
       <!-- Admin -->
       <section class="view" data-view="admin">
-        <h2 class="section-title">Admin · Add Video</h2>
-        <p class="hint">Paste a video link from any platform. The platform is detected automatically. YouTube thumbnails load instantly; other platforms need the backend in the real app (see README).</p>
+        <p class="hint">کسی بھی پلیٹ فارم کی ویڈیو کا لنک لگائیں۔ پلیٹ فارم خود پہچانا جائے گا۔ یوٹیوب کی تصویر فوراً آ جاتی ہے؛ باقی پلیٹ فارمز کے لیے اصل ایپ میں سرور کی ضرورت ہوگی (README دیکھیں)۔</p>
         <form id="addForm" class="form">
-          <label>Video link<input id="addUrl" type="url" required placeholder="https://youtube.com/watch?v=…" /></label>
-          <div class="detected" id="detected">Platform: —</div>
-          <label>Title<input id="addTitle" type="text" required placeholder="Hamza aur …" /></label>
-          <label>Category<select id="addCat"></select></label>
-          <label class="check"><input id="addFeatured" type="checkbox" /> Show as featured (top banner)</label>
-          <button class="btn" type="submit">Save Video</button>
+          <label>ویڈیو لنک<input id="addUrl" type="url" dir="ltr" required placeholder="https://youtube.com/watch?v=…" /></label>
+          <div class="detected" id="detected">پلیٹ فارم: —</div>
+          <label>عنوان<input id="addTitle" type="text" required placeholder="حمزہ اور …" /></label>
+          <label>زمرہ<select id="addCat"></select></label>
+          <label class="check"><input id="addFeatured" type="checkbox" /> خاص پیشکش کے طور پر دکھائیں</label>
+          <button class="pill" type="submit">محفوظ کریں</button>
         </form>
-        <h2 class="section-title">Added by you</h2>
+        <h2 class="section-title">آپ کی شامل کردہ ویڈیوز</h2>
         <div class="grid" id="adminList"></div>
+      </section>
+
+      <!-- Category list ("see all") -->
+      <section class="view" data-view="list">
+        <div class="grid" id="listGrid"></div>
       </section>
 
       <!-- Video detail -->
       <section class="view" data-view="video">
-        <button class="link back" id="backBtn">← Back</button>
         <div id="videoDetail"></div>
       </section>
     </main>
 
-    <nav class="tabbar" aria-label="Main">
-      <button data-go="home" class="active"><span>🏠</span>Home</button>
-      <button data-go="search"><span>🔍</span>Search</button>
-      <button data-go="favorites"><span>⭐</span>Favorites</button>
-      <button data-go="admin"><span>➕</span>Admin</button>
+    <nav class="tabbar" aria-label="مینو">
+      <button data-go="home" class="active"><span class="ico">🏠</span>ہوم</button>
+      <button data-go="search"><span class="ico">🔍</span>تلاش کریں</button>
+      <button data-go="favorites"><span class="ico">♥</span>پسندیدہ</button>
+      <button data-go="profile"><img class="ico-img" src="assets/icon-192.png" alt="" width="26" height="26" />پروفائل</button>
     </nav>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
   </div>
