@@ -51,7 +51,7 @@ function youtubeId(url) {
 async function fetchThumbnail(platform, url) {
   if (platform === 'youtube') {
     const id = youtubeId(url);
-    return id ? `https://i.ytimg.com/vi/${id}/hqdefault.jpg` : '';
+    return id ? `https://i.ytimg.com/vi/${id}/maxresdefault.jpg` : '';
   }
   if (platform === 'tiktok') {
     try {
@@ -76,7 +76,8 @@ function placeholderThumb(video, withTitle = true) {
   return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
 }
 
-// Falls back to the generated thumbnail if a remote image fails (offline, blocked, removed).
+// YouTube's full-size thumbnail (maxresdefault) is missing for some videos, so step down to
+// hqdefault first, then to the generated thumbnail (offline, blocked, removed).
 const imgTag = (v, withTitle = true) =>
   `<img loading="lazy" src="${v.thumbnail || placeholderThumb(v, withTitle)}" alt="" data-fallback="${v.id}" data-title="${withTitle}" />`;
 
@@ -84,7 +85,10 @@ document.addEventListener('error', e => {
   const img = e.target;
   if (img.tagName !== 'IMG' || !img.dataset.fallback || img.dataset.failed) return;
   const v = allVideos().find(x => x.id === img.dataset.fallback);
-  if (v) { img.dataset.failed = '1'; img.src = placeholderThumb(v, img.dataset.title === 'true'); }
+  if (!v) return;
+  if (img.src.includes('/maxresdefault.jpg')) { img.src = img.src.replace('/maxresdefault.jpg', '/hqdefault.jpg'); return; }
+  img.dataset.failed = '1';
+  img.src = placeholderThumb(v, img.dataset.title === 'true');
 }, true);
 
 // ---------- Rendering ----------

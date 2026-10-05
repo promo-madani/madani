@@ -74,7 +74,7 @@ installed on a phone via "Add to Home Screen" (it's a PWA).
   "url": "https://youtu.be/XXXXXXXXXXX",
   "videoId": "XXXXXXXXXXX",
   "title": "Hamza aur Sach Bolna",
-  "thumbnail": "https://i.ytimg.com/vi/XXXXXXXXXXX/hqdefault.jpg",
+  "thumbnail": "https://i.ytimg.com/vi/XXXXXXXXXXX/maxresdefault.jpg",
   "category": "stories | manners | duas | ramadan | learning | shorts",
   "duration": "8:12",
   "views": "83K",
@@ -90,7 +90,7 @@ This is the same shape the prototype uses, so `app.js` rendering logic maps dire
 
 | Platform | Method | Notes |
 |---|---|---|
-| YouTube | **Automatic:** YouTube Data API v3 `playlistItems.list` on the channel's uploads playlist, scheduled Cloud Function (hourly) | Free quota is enough. Thumbnail: `i.ytimg.com/vi/{id}/hqdefault.jpg` |
+| YouTube | **Automatic:** YouTube Data API v3 `playlistItems.list` on the channel's uploads playlist, scheduled Cloud Function (hourly) | Free quota is enough. Thumbnail: `i.ytimg.com/vi/{id}/maxresdefault.jpg` (fall back to `hqdefault.jpg`) |
 | Facebook | Graph API `/{page-id}/videos` with a Page access token, **or** admin pastes link | Requires admin access to the official Page + Meta app review |
 | Instagram | Instagram Graph API `/{ig-user-id}/media` (Business/Creator account linked to FB Page), **or** paste link | Same Meta app as Facebook |
 | TikTok | Admin pastes link → `https://www.tiktok.com/oembed?url=…` returns title + thumbnail | Official Display API needs app approval |

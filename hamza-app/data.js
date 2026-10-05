@@ -39,7 +39,7 @@ const YOUTUBE_VIDEOS = [
   id: 'yt-' + id,
   platform: 'youtube',
   url: `https://www.youtube.com/watch?v=${id}`,
-  thumbnail: `https://i.ytimg.com/vi/${id}/hqdefault.jpg`,
+  thumbnail: `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`,
   title, category, emoji, duration, views, featured
 }));
 
