@@ -5,7 +5,8 @@ const PLATFORMS = {
   youtube:   { name: 'YouTube',   ur: 'یوٹیوب',   color: '#ff0000', icon: '▶' },
   facebook:  { name: 'Facebook',  ur: 'فیس بک',   color: '#1877f2', icon: 'f' },
   tiktok:    { name: 'TikTok',    ur: 'ٹک ٹاک',   color: '#111111', icon: '♪' },
-  instagram: { name: 'Instagram', ur: 'انسٹاگرام', color: '#d62976', icon: '◎' }
+  instagram: { name: 'Instagram', ur: 'انسٹاگرام', color: '#d62976', icon: '◎' },
+  threads:   { name: 'Threads',   ur: 'تھریڈز',   color: '#000000', icon: '@' }
 };
 
 // Official Hamza Cartoon World accounts.
@@ -13,7 +14,8 @@ const OFFICIAL_ACCOUNTS = [
   { platform: 'youtube',   handle: '@HamzaCartoon-World', url: 'https://www.youtube.com/@HamzaCartoon-World' },
   { platform: 'facebook',  handle: 'HamzaCartoonWorld',   url: 'https://www.facebook.com/HamzaCartoonWorld/' },
   { platform: 'instagram', handle: '@hamzacartoonworld',  url: 'https://www.instagram.com/hamzacartoonworld/' },
-  { platform: 'tiktok',    handle: '@hamzacartoon51226',  url: 'https://www.tiktok.com/@hamzacartoon51226' }
+  { platform: 'tiktok',    handle: '@hamzacartoonworld',  url: 'https://www.tiktok.com/@hamzacartoonworld' },
+  { platform: 'threads',   handle: '@hamzacartoonworld',  url: 'https://www.threads.com/@hamzacartoonworld' }
 ];
 
 const CATEGORIES = [

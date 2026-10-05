@@ -1,5 +1,5 @@
 // Offline cache for the app shell. Thumbnails and embeds still need the network.
-const CACHE = 'hamza-v5';
+const CACHE = 'hamza-v6';
 const SHELL = ['./', 'index.html', 'styles.css', 'app.js', 'data.js', 'manifest.json',
   'assets/icon-192.png', 'assets/splash-emblem.webp', 'assets/splash-hamza.webp', 'assets/splash-title.webp',
   'assets/welcome-hamza.webp', 'assets/welcome-title.webp',
