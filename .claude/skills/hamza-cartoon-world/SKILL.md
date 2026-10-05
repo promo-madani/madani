@@ -59,15 +59,15 @@ the main channel's expectation story-first.
 ## Episode backlog (highest potential first)
 
 1. **Dada Jan Ki Awaaz… Lekin Phone Par Kaun Tha?** — AI voice-clone
-   emergency call; Dada Jan is sitting right there. Text: FAKE CALL!
-2. **Hamza Ki Fake Video Kis Ne Banai?** — deepfake goes viral. Text: REAL OR FAKE?
-3. **Free Diamonds Ke Chakkar Mein Hamza Phans Gaya!** — game-reward account/password scam. Text: FREE?
-4. 1 Din Mein Sab Theek? Dhongi Hakeem Ka Raaz — fake miracle medicine. Text: JADUI DAWA?
-5. Hamza Ke Ghar Aaya Ek Ajeeb Parcel! — unordered COD parcel. Text: YEH KIS NE BHEJA?
+   emergency call; Dada Jan is sitting right there. Text: DADA JAN KI FAKE CALL!
+2. **Hamza Ki Fake Video Kis Ne Banai?** — deepfake goes viral. Text: HAMZA KI FAKE VIDEO?
+3. **Free Diamonds Ke Chakkar Mein Hamza Phans Gaya!** — game-reward account/password scam. Text: FREE DIAMONDS KA DHOKA!
+4. 1 Din Mein Sab Theek? Dhongi Hakeem Ka Raaz — fake miracle medicine. Text: DHONGI HAKEEM KI JADUI DAWA?
+5. Hamza Ke Ghar Aaya Ek Ajeeb Parcel! — unordered COD parcel. Text: PARCEL KIS NE BHEJA?
 6. Chanda Maangne Wala Sach Bol Raha Tha? — fake charity collector.
 7. School Ke Bahar Hamza Ko Kaun Bula Raha Tha? — stranger: "Dada Jan ne bheja hai."
-8. Is QR Code Ko Scan Karna Mehnga Par Gaya! — free-gift poster QR. Text: SCAN MAT KARO!
-9. Lift Khud Ba Khud Kyun Chal Rahi Thi? — scary mystery, logical explanation. Text: KAUN HAI?
+8. Is QR Code Ko Scan Karna Mehnga Par Gaya! — free-gift poster QR. Text: QR CODE SCAN MAT KARO!
+9. Lift Khud Ba Khud Kyun Chal Rahi Thi? — scary mystery, logical explanation. Text: LIFT MEIN KAUN HAI?
 10. Hamza Ne 10 Lakh Jeet Liye? — fake lucky draw, "pay the fee first".
 
 Build a **cluster** from Dhongi Baba so YouTube can chain recommendations:
@@ -108,7 +108,18 @@ Branding (`| Hamza Cartoon World`) only at the end, if at all.
 
 - Max 3 focal points: Hamza (big reaction face) + danger/key object +
   antagonist or reaction. One emotion, one danger, one question.
-- Text 2–4 words only, never the full title, never over Hamza's face.
+- **Thumbnail text must define the story on its own** — a complete phrase
+  that names the subject (who / what / where), never a half phrase that only
+  makes sense with the title. Usually 3–6 words, a question or exclamation.
+  - ❌ "YEH KIS NE BHEJA?" → ✅ "PARCEL KIS NE BHEJA?"
+  - ❌ "ANDAR KYA HAI?" → ✅ "AHRAM-E-MISR KE ANDAR KYA HAI?"
+  - ❌ "KHO GAYA!" → ✅ "HAMZA NORWAY MEIN KHO GAYA!"
+  - ❌ "KAUN HAI?" → ✅ "LIFT MEIN KAUN HAI?"
+  - ❌ "FAKE CALL!" → ✅ "DADA JAN KI FAKE CALL!"
+  - Test: someone who sees only the thumbnail (no title) must understand the
+    story question. Still short enough to read on a phone — never the whole
+    title, never over Hamza's face. Text and title should complement each
+    other, not repeat word for word.
 - Background tells the story, not decoration.
 - Don't change a thumbnail/title that is already working (e.g. Dhongi
   Baba). Re-package only videos with impressions but low CTR.
@@ -121,7 +132,7 @@ Create a highly clickable YouTube thumbnail for "Hamza Cartoon World" in premium
 STORY: [one-line story situation]
 EMOTION: [shocked / worried / curious / surprised / confused]
 PROBLEM ELEMENT: [villain / suspicious object / phone / parcel / thief / scammer / warning symbol / mystery]
-TEXT: "[2–4 WORDS]"
+TEXT: "[3–6 WORD COMPLETE STORY PHRASE — names the subject]"
 
 MAIN CHARACTER:
 Hamza, a 10-year-old Muslim boy, wearing a clean white shalwar kameez, white turban fully covering his hair, black shoes, expressive innocent face. Keep Hamza's face and character design consistent with the original reference.
@@ -147,7 +158,7 @@ Simple and uncluttered. Only the environment necessary to explain the story.
 Slight depth of field. No unnecessary people, objects, decorations, or busy details.
 
 THUMBNAIL TEXT:
-Only the TEXT above, 2–4 very large words. Bold, thick, highly readable 3D text.
+Only the TEXT above, very large. It must be a complete phrase that explains the story on its own (names who/what/where), not a half phrase. Bold, thick, highly readable 3D text.
 Place it in an empty area and never cover Hamza's face. Readable on a small mobile screen.
 
 VISUAL STYLE:
@@ -163,8 +174,10 @@ No watermark. No logo covering the scene.
 16:9 YouTube thumbnail, 1280x720, ultra sharp, high detail, professional commercial quality.
 ```
 
-Example short texts: FAKE CALL!, KAUN HAI?, YEH KYA HAI?, CHOR!, SCAM!,
-MAT KARO!, DHONGI BABA!, SCAN MAT KARO!, YEH KIS NE BHEJA?
+Example texts (complete, story-defining): DADA JAN KI FAKE CALL!,
+PARCEL KIS NE BHEJA?, AHRAM-E-MISR KE ANDAR KYA HAI?, QR CODE SCAN MAT KARO!,
+LIFT MEIN KAUN HAI?, GHAR MEIN CHOR!, DHONGI BABA KA RAAZ!,
+HAMZA NORWAY MEIN KHO GAYA!
 
 When asked for a thumbnail, output the master prompt with STORY, EMOTION,
 PROBLEM ELEMENT and TEXT filled in, plus a one-line layout note
