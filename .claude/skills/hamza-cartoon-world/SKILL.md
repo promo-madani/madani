@@ -12,8 +12,8 @@ in Roman Urdu unless asked otherwise.
 ## Channel snapshot (user-provided, 5 Oct 2026)
 
 - ~9.75K subscribers, ~128 videos. Urdu, 3D animated, Islamic/moral, family.
-- Recurring characters: **Hamza** (≈10-year-old boy, white shalwar kameez,
-  white turban fully covering hair, black shoes) and **Dada Jan**.
+- Recurring characters: **Hamza** (≈8–10-year-old boy, white shalwar kameez,
+  white turban fully covering hair, red scarf around the neck) and **Dada Jan**.
 - Recent performance (views / age / ≈ per day):
 
 | Video | Views | Age | ≈/day |
@@ -124,54 +124,76 @@ Branding (`| Hamza Cartoon World`) only at the end, if at all.
 - Don't change a thumbnail/title that is already working (e.g. Dhongi
   Baba). Re-package only videos with impressions but low CTR.
 
-### Thumbnail master prompt (fill in the [STORY] parts)
+### House thumbnail style (from the channel's own thumbnails, Oct 2026)
+
+This is the look the user wants on every thumbnail — match it:
+
+- **Characters:** glossy Pixar-style 3D, big round shiny eyes, rosy cheeks.
+  - Hamza: white turban, white kurta/shalwar kameez, **red scarf around the neck** (signature item).
+  - Dada Jan: long white beard, white turban, round glasses, white kurta, warm kind face.
+  - Little sister (when present): white hijab, white dress.
+  - Villains (thief, Dhongi Baba, scammer): exaggerated cartoon — sly grin, raised eyebrow, dark/earthy clothes, black mask for thieves.
+- **Text:** huge chunky rounded cartoon 3D lettering, Title Case or CAPS Roman Urdu,
+  fill = white or yellow→orange gradient, **thick red or dark-blue outline** plus a
+  dark drop shadow; 2–3 stacked lines, slightly arched/tilted, bouncy baseline;
+  occupies the top-right ~40–50% of the frame. Yellow burst/motion lines and
+  sparkles around it, sometimes an emoji-style icon inside the text (thief mask,
+  flag, question mark). Optional "WOW!" exclamation for adventure episodes.
+- **Composition:** Hamza (and family) left / bottom-left, big and reacting;
+  villain or key object right; text top-right. Hamza often points toward the
+  subject or looks at it.
+- **Background:** bright, saturated, detailed but readable — real location
+  (Norway fjord village with flag, cozy home, park, shop), warm sunlight,
+  soft depth of field. Not plain, not cluttered.
+- **Mood:** high-energy, colorful, family-friendly; even "danger" episodes stay
+  bright and warm, never dark or scary.
+
+### Thumbnail master prompt (fill in the [ ] parts)
 
 ```
-Create a highly clickable YouTube thumbnail for "Hamza Cartoon World" in premium 3D animated cartoon style, cinematic and family-friendly.
+Create a highly clickable YouTube thumbnail for the kids channel "Hamza Cartoon World", in glossy premium 3D Pixar-style cartoon animation, bright, colorful and family-friendly.
 
 STORY: [one-line story situation]
-EMOTION: [shocked / worried / curious / surprised / confused]
-PROBLEM ELEMENT: [villain / suspicious object / phone / parcel / thief / scammer / warning symbol / mystery]
-TEXT: "[3–6 WORD COMPLETE STORY PHRASE — names the subject]"
+CHARACTERS IN SCENE: [Hamza / Hamza + Dada Jan / + little sister / + villain]
+HAMZA'S EMOTION: [shocked / worried / curious / amazed / happy / confused]
+KEY SUBJECT (right side): [villain / object / place — describe]
+LOCATION: [specific setting]
+TEXT: "[complete story-defining Roman Urdu phrase, 3–7 words]"
+TEXT LINES: [how to split it into 2–3 lines]
 
-MAIN CHARACTER:
-Hamza, a 10-year-old Muslim boy, wearing a clean white shalwar kameez, white turban fully covering his hair, black shoes, expressive innocent face. Keep Hamza's face and character design consistent with the original reference.
+CHARACTER DESIGN (keep consistent with the channel):
+Hamza: a cute 8–10 year old Muslim boy, big round shiny brown eyes, rosy cheeks, white turban fully covering his hair, white kurta shalwar kameez, red scarf wrapped around his neck.
+Dada Jan (if present): kind elderly grandfather with a long fluffy white beard, white turban, round glasses, white kurta, warm expressive face.
+Little sister (if present): cute small girl in a white hijab and white dress, big eyes.
+Villain (if present): exaggerated cartoon villain with a sly grin, raised eyebrow and expressive face, clearly "bad guy" but funny, not scary.
 
 COMPOSITION:
-Use only 2–3 main visual elements.
-Place Hamza large in the foreground, occupying approximately 35–45% of the thumbnail.
-Show a strong facial reaction matching EMOTION.
-Place the PROBLEM ELEMENT clearly on the opposite side.
-Create a strong visual conflict between Hamza and the problem.
+Hamza large on the LEFT / bottom-left foreground (about 30–40% of the frame) with a strong, exaggerated facial reaction, pointing at or looking toward the key subject.
+KEY SUBJECT on the RIGHT, clearly visible.
+TEXT in the TOP-RIGHT area, taking about 40–50% of the frame, never covering any face.
+Maximum 3 main elements: Hamza (+ family), key subject, text.
 
-CAMERA:
-Medium close-up or close-up. Slight cinematic perspective. Eye-level camera. No extreme low angle.
-Keep faces large and clearly readable even on a mobile screen.
+THUMBNAIL TEXT STYLE:
+Huge chunky rounded cartoon 3D lettering, exactly the words of TEXT, split into the lines given.
+Fill: white or bright yellow-to-orange gradient. Thick red (or dark blue) outline, dark drop shadow, slight glossy highlight.
+Slightly arched and tilted with a playful bouncy baseline.
+Yellow burst lines and small sparkles around the text; optionally one small emoji-style icon related to the story beside or inside the text.
+Perfect spelling, crisp edges, readable on a small mobile screen.
 
-LIGHTING:
-Bright cinematic lighting. Strong subject separation. Soft rim light around Hamza.
-Slightly darker or dramatic background behind the danger or mystery element.
-High contrast but child-friendly. Clean, polished, premium 3D render.
+BACKGROUND & LIGHTING:
+Bright, saturated, detailed LOCATION background with soft depth of field, warm sunlight, cheerful colors.
+Strong rim light separating characters from the background.
+Even in danger or mystery stories keep the image bright and warm, never dark or scary.
 
-BACKGROUND:
-Simple and uncluttered. Only the environment necessary to explain the story.
-Slight depth of field. No unnecessary people, objects, decorations, or busy details.
-
-THUMBNAIL TEXT:
-Only the TEXT above, very large. It must be a complete phrase that explains the story on its own (names who/what/where), not a half phrase. Bold, thick, highly readable 3D text.
-Place it in an empty area and never cover Hamza's face. Readable on a small mobile screen.
-
-VISUAL STYLE:
-Premium 3D Pixar-inspired family animation quality, expressive characters, detailed textures, professional cinematic lighting, vibrant but controlled colors, polished YouTube kids thumbnail, strong storytelling, emotional clarity, high curiosity, instantly understandable visual story.
+STYLE:
+Glossy premium 3D Pixar-inspired animation, smooth skin shading, detailed fabric and textures, vibrant high-contrast colors, professional YouTube kids thumbnail, high energy, strong emotion, instantly understandable story.
 
 IMPORTANT:
-The viewer should understand the central problem within one second.
-Create curiosity without showing the complete solution.
-One main emotion. One main danger or mystery. One clear story question.
-No unnecessary text. No crowded composition. No duplicate characters.
-No extra limbs or fingers. No distorted faces. No blurry image.
-No watermark. No logo covering the scene.
-16:9 YouTube thumbnail, 1280x720, ultra sharp, high detail, professional commercial quality.
+The viewer must understand the story from the image and text alone within one second.
+Create curiosity without showing the solution.
+No extra text besides TEXT. No misspelled letters. No duplicate characters.
+No extra limbs or fingers. No distorted faces. No blurry image. No watermark or logo.
+16:9 YouTube thumbnail, 1280x720, ultra sharp, high detail.
 ```
 
 Example texts (complete, story-defining): DADA JAN KI FAKE CALL!,
@@ -179,9 +201,9 @@ PARCEL KIS NE BHEJA?, AHRAM-E-MISR KE ANDAR KYA HAI?, QR CODE SCAN MAT KARO!,
 LIFT MEIN KAUN HAI?, GHAR MEIN CHOR!, DHONGI BABA KA RAAZ!,
 HAMZA NORWAY MEIN KHO GAYA!
 
-When asked for a thumbnail, output the master prompt with STORY, EMOTION,
-PROBLEM ELEMENT and TEXT filled in, plus a one-line layout note
-(left / center / right).
+When asked for a thumbnail, output the full master prompt with every [ ]
+field filled in (always in the house style above), plus a one-line layout
+note (left / right / text position).
 
 ## Description template
 
