@@ -57,7 +57,8 @@ installed on a phone via "Add to Home Screen" (it's a PWA).
 | `styles.css` | Design (brand colors: green `#0f7a4f`, gold `#ffd166`; dark mode supported) |
 | `app.js` | Logic: rendering, filters, link detection, thumbnails, favorites, share |
 | `data.js` | Platforms, categories, demo videos (replace with the API) |
-| `manifest.json`, `sw.js`, `icon.svg` | PWA install + offline shell |
+| `manifest.json`, `sw.js` | PWA install + offline shell |
+| `assets/` | Hamza artwork: `hamza-original.jpg` (source, 5504×3072, not loaded by the app), `hamza.webp`/`.jpg` (welcome card), `icon-192/512.png`, `icon-maskable-512.png`, `apple-touch-icon.png` (app icons cropped from the source) |
 
 ## Production plan for the IT section
 
