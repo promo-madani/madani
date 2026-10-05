@@ -1,7 +1,7 @@
 # Hamza Islahi Cartoon – App Prototype
 
 A clickable prototype of the **Hamza Islahi Cartoon** mobile app. The app gathers every
-Hamza Islahi video from **YouTube, Facebook, TikTok, Instagram and Threads**
+Hamza Islahi video from **YouTube, Facebook, TikTok and Instagram**
 into one feed, each shown with a thumbnail.
 
 > **Roman Urdu khulasa:** Yeh app ka *prototype* hai, yani design aur flow dikhane ke liye
@@ -18,7 +18,7 @@ into one feed, each shown with a thumbnail.
 | TikTok | [@hamzacartoon51226](https://www.tiktok.com/@hamzacartoon51226) |
 
 These are listed in `OFFICIAL_ACCOUNTS` in `data.js` and shown on the Home screen as
-"Follow Hamza Cartoon World". A Threads account still needs to be provided. X (Twitter) is intentionally not included.
+"Follow Hamza Cartoon World". X (Twitter) and Threads are intentionally not included.
 
 ## How to run
 
@@ -37,14 +37,14 @@ installed on a phone via "Add to Home Screen" (it's a PWA).
 
 | Screen | Features |
 |---|---|
-| **Home** | Featured "New Episode" banner, platform filter chips (All / YouTube / Facebook / TikTok / Instagram / Threads), categories in English + Urdu, latest-video grid with thumbnail, platform badge, duration and date |
+| **Home** | Featured "New Episode" banner, platform filter chips (All / YouTube / Facebook / TikTok / Instagram), categories in English + Urdu, latest-video grid with thumbnail, platform badge, duration and date |
 | **Video page** | YouTube plays inside the app (privacy-enhanced embed); other platforms show an "Open in …" button; Favorite, Share, "More like this" |
 | **Search** | Search by title, category or platform |
 | **Favorites** | Saved on the device |
 | **Admin** | Paste any video link → platform auto-detected → thumbnail fetched (YouTube instantly, TikTok via oEmbed) → saved to the feed |
 
 **Prototype-only shortcuts that IT must replace:**
-- `YOUTUBE_VIDEOS` in `data.js` holds 7 real Hamza Cartoon Series episodes found via web search. They are not sorted by popularity and should be checked against the channel. The production app replaces this list with the YouTube API sync, which can sort by views (`search.list?channelId=…&order=viewCount`).
+- `YOUTUBE_VIDEOS` in `data.js` holds 6 popular episodes chosen by the channel team. Their titles are placeholders ("Popular Episode 1–6") and category is set to Islahi Stories; the YouTube API sync supplies real titles, and the popular list can come from `search.list?channelId=…&order=viewCount`.
 - Videos for other platforms in `data.js` are **demo placeholders** (generated thumbnails, no real links).
 - Admin-added videos and favorites live in the browser's `localStorage`, so each phone sees only its own additions.
 - Admin has no login.
@@ -70,7 +70,7 @@ installed on a phone via "Add to Home Screen" (it's a PWA).
 
 ```json
 {
-  "platform": "youtube | facebook | tiktok | instagram | threads",
+  "platform": "youtube | facebook | tiktok | instagram",
   "url": "https://youtu.be/XXXXXXXXXXX",
   "videoId": "XXXXXXXXXXX",
   "title": "Hamza aur Sach Bolna",
@@ -93,7 +93,6 @@ This is the same shape the prototype uses, so `app.js` rendering logic maps dire
 | Facebook | Graph API `/{page-id}/videos` with a Page access token, **or** admin pastes link | Requires admin access to the official Page + Meta app review |
 | Instagram | Instagram Graph API `/{ig-user-id}/media` (Business/Creator account linked to FB Page), **or** paste link | Same Meta app as Facebook |
 | TikTok | Admin pastes link → `https://www.tiktok.com/oembed?url=…` returns title + thumbnail | Official Display API needs app approval |
-| Threads | Threads API (own account) **or** paste link + Open Graph | |
 
 Link previews (oEmbed / Open Graph) must be fetched **server-side** in a Cloud Function,
 because browsers/apps hit CORS and login walls. Store the thumbnail URL (or a copy in

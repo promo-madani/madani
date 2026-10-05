@@ -39,7 +39,6 @@ function detectPlatform(url) {
   if (/(^|\.)facebook\.com$|^fb\.watch$/.test(host)) return 'facebook';
   if (/(^|\.)tiktok\.com$/.test(host)) return 'tiktok';
   if (/(^|\.)instagram\.com$/.test(host)) return 'instagram';
-  if (/^threads\.(net|com)$/.test(host)) return 'threads';
   return null;
 }
 
@@ -117,7 +116,7 @@ function renderHero() {
   if (!v) return;
   $('#hero').dataset.id = v.id;
   $('#hero').innerHTML = `${imgTag(v, false)}
-    <div class="overlay"><span class="tag">★ NEW EPISODE</span><h3>${escapeHtml(v.title)}</h3></div>`;
+    <div class="overlay"><span class="tag">★ FEATURED</span><h3>${escapeHtml(v.title)}</h3></div>`;
 }
 
 function renderChips() {

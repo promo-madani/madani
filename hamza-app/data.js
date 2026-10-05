@@ -5,8 +5,7 @@ const PLATFORMS = {
   youtube:   { name: 'YouTube',   color: '#ff0000', icon: '▶' },
   facebook:  { name: 'Facebook',  color: '#1877f2', icon: 'f' },
   tiktok:    { name: 'TikTok',    color: '#111111', icon: '♪' },
-  instagram: { name: 'Instagram', color: '#d62976', icon: '◎' },
-  threads:   { name: 'Threads',   color: '#333333', icon: '@' }
+  instagram: { name: 'Instagram', color: '#d62976', icon: '◎' }
 };
 
 // Official Hamza Cartoon World accounts.
@@ -26,22 +25,23 @@ const CATEGORIES = [
   { id: 'shorts',   name: 'Shorts & Reels', urdu: 'مختصر ویڈیوز',    emoji: '⚡' }
 ];
 
-// Real Hamza Cartoon Series episodes on YouTube (found via web search, not yet sorted by views).
-// The real app gets this list from the YouTube Data API sync instead.
+// Popular Hamza Islahi Cartoon episodes on YouTube, chosen by the channel team.
+// Titles are placeholders until confirmed; the real app gets titles from the YouTube Data API sync.
 const YOUTUBE_VIDEOS = [
-  ['txPnt1pmbVk', 'Sach Ki Barkat',              'stories',  '✅'],
-  ['WfsK6K_ix9w', 'Hamza Nay Parhai Barish Ki Dua', 'duas',  '🌧️'],
-  ['VYTmB95EDXE', 'Safar Ki Dua',                'duas',     '🚗'],
-  ['lw5mt-t90PY', 'Eid Mubarak',                 'ramadan',  '🌙'],
-  ['w9jnUyCZJjQ', 'Eagle',                       'learning', '🦅'],
-  ['fbG2d47MNBQ', 'Strawberry',                  'learning', '🍓'],
-  ['1B0hDSMJ9kI', 'Exercise',                    'learning', '🏃']
-].map(([id, title, category, emoji], i) => ({
+  '8XqLyAAUGSk',
+  'nQmpF0a3FJI',
+  'nt6_uhLKf3k',
+  'ZOs9dI76TWI',
+  'FPCsPN_J6Bs',
+  '8pwVrI7KIM4'
+].map((id, i) => ({
   id: 'yt-' + id,
   platform: 'youtube',
   url: `https://www.youtube.com/watch?v=${id}`,
   thumbnail: `https://i.ytimg.com/vi/${id}/hqdefault.jpg`,
-  title, category, emoji,
+  title: `Popular Episode ${i + 1}`,
+  category: 'stories',
+  emoji: '⭐',
   featured: i === 0
 }));
 
@@ -51,7 +51,6 @@ const DEMO_VIDEOS = [
   { id: 'd2',  platform: 'tiktok',    category: 'shorts',   title: 'Hamza ki Pyari Dua',              emoji: '🤲', duration: '0:45', publishedAt: '2026-10-03' },
   { id: 'd3',  platform: 'facebook',  category: 'manners',  title: 'Ammi Abbu ka Adab',               emoji: '❤️', duration: '6:30', publishedAt: '2026-10-02' },
   { id: 'd4',  platform: 'instagram', category: 'shorts',   title: 'Salam Karna Sunnat Hai',          emoji: '👋', duration: '0:30', publishedAt: '2026-10-02' },
-  { id: 'd7',  platform: 'threads',   category: 'stories',  title: 'Hamza ne Dost ki Madad ki',       emoji: '🧒', duration: '1:10', publishedAt: '2026-09-29' },
   { id: 'd9',  platform: 'tiktok',    category: 'manners',  title: 'Khana Khane ke Adab',             emoji: '🍽️', duration: '0:58', publishedAt: '2026-09-27' },
   { id: 'd10', platform: 'facebook',  category: 'learning', title: 'Wudu ka Tareeqa',                 emoji: '💧', duration: '5:15', publishedAt: '2026-09-26' },
   { id: 'd11', platform: 'instagram', category: 'duas',     title: 'Ghar se Nikalne ki Dua',          emoji: '🚪', duration: '0:40', publishedAt: '2026-09-25' },
