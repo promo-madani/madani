@@ -1,7 +1,7 @@
 # Hamza Islahi Cartoon – App Prototype
 
 A clickable prototype of the **Hamza Islahi Cartoon** mobile app. The app gathers every
-Hamza Islahi video from **YouTube, Facebook, TikTok and Instagram**
+Hamza Islahi video from **YouTube, Facebook, TikTok, Instagram and Threads**
 into one feed, each shown with a thumbnail.
 
 > **Roman Urdu khulasa:** Yeh app ka *prototype* hai, yani design aur flow dikhane ke liye
@@ -15,10 +15,11 @@ into one feed, each shown with a thumbnail.
 | YouTube | [@HamzaCartoon-World](https://www.youtube.com/@HamzaCartoon-World) |
 | Facebook | [HamzaCartoonWorld](https://www.facebook.com/HamzaCartoonWorld/) |
 | Instagram | [@hamzacartoonworld](https://www.instagram.com/hamzacartoonworld/) |
-| TikTok | [@hamzacartoon51226](https://www.tiktok.com/@hamzacartoon51226) |
+| TikTok | [@hamzacartoonworld](https://www.tiktok.com/@hamzacartoonworld) |
+| Threads | [@hamzacartoonworld](https://www.threads.com/@hamzacartoonworld) |
 
 These are listed in `OFFICIAL_ACCOUNTS` in `data.js` and shown on the Home screen as
-"Follow Hamza Cartoon World". X (Twitter) and Threads are intentionally not included.
+"Follow Hamza Cartoon World". X (Twitter) is intentionally not included.
 
 ## How to run
 
@@ -42,7 +43,7 @@ The whole interface is in **Urdu, right-to-left**, following the approved design
 | **Splash** (`design/splash.jpg`) | Emblem, Hamza and the "حمزہ اصلاحی کارٹون" title, shown for ~1.4 s on every launch |
 | **Welcome** (`design/welcome.jpg`) | First launch only: Hamza, "حمزہ کارٹون" logo, tagline, **شروع کریں** (go to onboarding) and **کارٹون دیکھیں** (skip to Home) |
 | **Onboarding** (`design/onboarding.jpg`) | 3 swipeable slides with dots, **آگے بڑھیں** / **شروع کریں** and **چھوڑیں**; can be replayed from Profile |
-| **Home** (`design/home-screen.jpg`) | Teal header with Hamza avatar and brand, featured video with play button, platform chips (سب / یوٹیوب / فیس بک / ٹک ٹاک / انسٹاگرام), horizontal rails: **نئی کہانیاں**, **سب سے زیادہ دیکھی گئی** (sorted by views) and one rail per category, each with **سب دیکھیں**; official account links at the bottom |
+| **Home** (`design/home-screen.jpg`) | Teal header with Hamza avatar and brand, featured video with play button, platform chips (سب / یوٹیوب / فیس بک / ٹک ٹاک / انسٹاگرام / تھریڈز), horizontal rails: **نئی کہانیاں**, **سب سے زیادہ دیکھی گئی** (sorted by views) and one rail per category, each with **سب دیکھیں**; official account links at the bottom |
 | **Video page** | YouTube plays inside the app (privacy-enhanced embed) with a "watch on YouTube" link; other platforms open in their app; پسندیدہ, شیئر کریں, مزید ویڈیوز. Back (in-app or phone) returns to the previous screen and stops the video |
 | **Search / Favorites** | Search Urdu and Roman titles, categories and platforms; favorites saved on the device |
 | **Profile** | App info, follow links, install the app, replay intro, and the team-only **ویڈیو شامل کریں** (Admin) |
@@ -77,7 +78,7 @@ The whole interface is in **Urdu, right-to-left**, following the approved design
 
 ```json
 {
-  "platform": "youtube | facebook | tiktok | instagram",
+  "platform": "youtube | facebook | tiktok | instagram | threads",
   "url": "https://youtu.be/nQmpF0a3FJI",
   "videoId": "nQmpF0a3FJI",
   "title": "Dhongi Baba Sab Loot Kar Le Gaya",
@@ -101,6 +102,7 @@ This is the same shape the prototype uses, so `app.js` rendering logic maps dire
 | Facebook | Graph API `/{page-id}/videos` with a Page access token, **or** admin pastes link | Requires admin access to the official Page + Meta app review |
 | Instagram | Instagram Graph API `/{ig-user-id}/media` (Business/Creator account linked to FB Page), **or** paste link | Same Meta app as Facebook |
 | TikTok | Admin pastes link → `https://www.tiktok.com/oembed?url=…` returns title + thumbnail | Official Display API needs app approval |
+| Threads | Threads API `/{threads-user-id}/threads` (needs the same Meta app, with the `@hamzacartoonworld` Threads profile connected), **or** admin pastes link → server reads Open Graph `og:image` / `og:title` | |
 
 Link previews (oEmbed / Open Graph) must be fetched **server-side** in a Cloud Function,
 because browsers/apps hit CORS and login walls. Store the thumbnail URL (or a copy in

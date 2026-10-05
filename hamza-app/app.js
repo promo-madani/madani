@@ -47,6 +47,7 @@ function detectPlatform(url) {
   if (/(^|\.)facebook\.com$|^fb\.watch$/.test(host)) return 'facebook';
   if (/(^|\.)tiktok\.com$/.test(host)) return 'tiktok';
   if (/(^|\.)instagram\.com$/.test(host)) return 'instagram';
+  if (/^threads\.(net|com)$/.test(host)) return 'threads';
   return null;
 }
 
