@@ -14,7 +14,8 @@ const PLATFORMS = {
 const OFFICIAL_ACCOUNTS = [
   { platform: 'youtube',   handle: '@HamzaCartoon-World', url: 'https://www.youtube.com/@HamzaCartoon-World' },
   { platform: 'facebook',  handle: 'HamzaCartoonWorld',   url: 'https://www.facebook.com/HamzaCartoonWorld/' },
-  { platform: 'instagram', handle: '@hamzacartoonworld',  url: 'https://www.instagram.com/hamzacartoonworld/' }
+  { platform: 'instagram', handle: '@hamzacartoonworld',  url: 'https://www.instagram.com/hamzacartoonworld/' },
+  { platform: 'tiktok',    handle: '@hamzacartoon51226',  url: 'https://www.tiktok.com/@hamzacartoon51226' }
 ];
 
 const CATEGORIES = [

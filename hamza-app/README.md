@@ -15,9 +15,10 @@ into one feed, each shown with a thumbnail.
 | YouTube | [@HamzaCartoon-World](https://www.youtube.com/@HamzaCartoon-World) |
 | Facebook | [HamzaCartoonWorld](https://www.facebook.com/HamzaCartoonWorld/) |
 | Instagram | [@hamzacartoonworld](https://www.instagram.com/hamzacartoonworld/) |
+| TikTok | [@hamzacartoon51226](https://www.tiktok.com/@hamzacartoon51226) |
 
 These are listed in `OFFICIAL_ACCOUNTS` in `data.js` and shown on the Home screen as
-"Follow Hamza Cartoon World". TikTok, X and Threads accounts still need to be provided.
+"Follow Hamza Cartoon World". X and Threads accounts still need to be provided.
 
 ## How to run
 
