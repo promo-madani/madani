@@ -1,5 +1,5 @@
 // Offline cache for the app shell. Thumbnails and embeds still need the network.
-const CACHE = 'hamza-v1';
+const CACHE = 'hamza-v2';
 const SHELL = ['./', 'index.html', 'styles.css', 'app.js', 'data.js', 'manifest.json', 'icon.svg'];
 
 self.addEventListener('install', e => {

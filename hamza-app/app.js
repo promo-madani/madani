@@ -18,7 +18,7 @@ const state = {
   category: null,
   favorites: new Set(store.get('hamza.favorites', [])),
   added: store.get('hamza.added', []),
-  history: ['home']
+  scroll: {}
 };
 
 // Newest admin additions first, then the YouTube catalog, then demo items.
@@ -63,23 +63,22 @@ async function fetchThumbnail(platform, url) {
 }
 
 // Generated placeholder thumbnail for demo items and links without a fetched image.
-function placeholderThumb(video, withTitle = true) {
+function placeholderThumb(video) {
   const p = PLATFORMS[video.platform];
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180">
     <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#0f7a4f"/><stop offset="1" stop-color="${p.color}"/></linearGradient></defs>
     <rect width="320" height="180" fill="url(#g)"/>
-    <circle cx="160" cy="78" r="44" fill="#ffd166"/>
-    <text x="160" y="94" font-size="44" text-anchor="middle">${video.emoji || '🎬'}</text>
-    ${withTitle ? `<text x="160" y="152" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#fff" text-anchor="middle">${escapeHtml(video.title.slice(0, 30))}</text>` : ''}
+    <circle cx="160" cy="90" r="48" fill="#ffd166"/>
+    <text x="160" y="107" font-size="48" text-anchor="middle">${video.emoji || '🎬'}</text>
   </svg>`;
   return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
 }
 
 // YouTube's full-size thumbnail (maxresdefault) is missing for some videos, so step down to
 // hqdefault first, then to the generated thumbnail (offline, blocked, removed).
-const imgTag = (v, withTitle = true) =>
-  `<img loading="lazy" src="${v.thumbnail || placeholderThumb(v, withTitle)}" alt="" data-fallback="${v.id}" data-title="${withTitle}" />`;
+const imgTag = v =>
+  `<img loading="lazy" src="${v.thumbnail || placeholderThumb(v)}" alt="" data-fallback="${v.id}" />`;
 
 document.addEventListener('error', e => {
   const img = e.target;
@@ -88,7 +87,7 @@ document.addEventListener('error', e => {
   if (!v) return;
   if (img.src.includes('/maxresdefault.jpg')) { img.src = img.src.replace('/maxresdefault.jpg', '/hqdefault.jpg'); return; }
   img.dataset.failed = '1';
-  img.src = placeholderThumb(v, img.dataset.title === 'true');
+  img.src = placeholderThumb(v);
 }, true);
 
 // ---------- Rendering ----------
@@ -101,8 +100,9 @@ function cardHtml(v) {
       ${imgTag(v)}
       <span class="badge" style="background:${p.color}">${p.icon} ${p.name}</span>
       ${v.duration ? `<span class="dur">${v.duration}</span>` : ''}
+      ${v.demo ? '<span class="demo-tag">DEMO</span>' : ''}
     </div>
-    <button class="fav-btn" data-fav="${v.id}" aria-label="Favorite">${fav ? '⭐' : '☆'}</button>
+    <button class="fav-btn" data-fav="${v.id}" aria-label="${fav ? 'Remove from favorites' : 'Add to favorites'}">${fav ? '⭐' : '☆'}</button>
     <div class="meta"><h4>${escapeHtml(v.title)}</h4><small>${[categoryName(v.category), v.views && `${v.views} views`, formatDate(v.publishedAt)].filter(Boolean).join(' · ')}</small></div>
   </article>`;
 }
@@ -119,21 +119,25 @@ function renderHero() {
   const v = vids.find(x => x.featured) || vids[0];
   if (!v) return;
   $('#hero').dataset.id = v.id;
-  $('#hero').innerHTML = `${imgTag(v, false)}
-    <div class="overlay"><span class="tag">★ FEATURED</span><h3>${escapeHtml(v.title)}</h3></div>`;
+  $('#hero').setAttribute('aria-label', `Play ${v.title}`);
+  $('#hero').innerHTML = `${imgTag(v)}
+    <div class="overlay"><span class="tag">★ ${v.views ? 'MOST WATCHED' : 'FEATURED'}</span><h3>${escapeHtml(v.title)}</h3>
+    <span class="play">▶ Watch now</span></div>`;
 }
 
 function renderChips() {
   const items = [['all', { name: 'All', icon: '★', color: '#0f7a4f' }], ...Object.entries(PLATFORMS)];
   $('#platformChips').innerHTML = items.map(([key, p]) =>
-    `<button class="chip ${state.platform === key ? 'active' : ''}" data-platform="${key}">
+    `<button class="chip ${state.platform === key ? 'active' : ''}" data-platform="${key}" aria-pressed="${state.platform === key}">
       <i style="background:${p.color}">${p.icon}</i>${p.name}</button>`).join('');
 }
 
 function renderCategories() {
-  $('#categoryList').innerHTML = CATEGORIES.map(c =>
-    `<button class="cat ${state.category === c.id ? 'active' : ''}" data-cat="${c.id}">
-      <span>${c.emoji}</span>${c.name}<small>${c.urdu}</small></button>`).join('');
+  const counts = {};
+  allVideos().forEach(v => { counts[v.category] = (counts[v.category] || 0) + 1; });
+  $('#categoryList').innerHTML = CATEGORIES.filter(c => counts[c.id]).map(c =>
+    `<button class="cat ${state.category === c.id ? 'active' : ''}" data-cat="${c.id}" aria-pressed="${state.category === c.id}">
+      <span>${c.emoji}</span>${c.name}<small lang="ur" dir="rtl">${c.urdu}</small><em>${counts[c.id]} ${counts[c.id] === 1 ? 'video' : 'videos'}</em></button>`).join('');
   $('#addCat').innerHTML = CATEGORIES.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
 }
 
@@ -155,7 +159,7 @@ function renderFeed() {
   const parts = [];
   if (state.category) parts.push(categoryName(state.category));
   if (state.platform !== 'all') parts.push(PLATFORMS[state.platform].name);
-  $('#feedTitle').textContent = parts.length ? parts.join(' · ') : 'Latest Videos';
+  $('#feedTitle').textContent = parts.length ? parts.join(' · ') : 'All Videos';
   $('#clearCat').hidden = !state.category;
   renderGrid($('#feed'), vids, 'No videos here yet.');
 }
@@ -189,7 +193,7 @@ function renderVideo(id) {
     <h2>${escapeHtml(v.title)}</h2>
     <p class="info">${[`${p.icon} ${p.name}`, categoryName(v.category), v.views && `${v.views} views`, formatDate(v.publishedAt)].filter(Boolean).join(' · ')}</p>
     <div class="actions">
-      ${v.url && !ytId ? `<a class="btn" href="${escapeHtml(v.url)}" target="_blank" rel="noopener">Open in ${p.name} ↗</a>` : ''}
+      ${v.url ? `<a class="btn" href="${escapeHtml(v.url)}" target="_blank" rel="noopener">${ytId ? 'Watch on YouTube' : `Open in ${p.name}`} ↗</a>` : ''}
       ${v.demo && officialUrl(v.platform) ? `<a class="btn" href="${officialUrl(v.platform)}" target="_blank" rel="noopener">Visit Hamza on ${p.name} ↗</a>` : ''}
       <button class="btn ghost" data-fav="${v.id}">${fav ? '⭐ Saved' : '☆ Favorite'}</button>
       <button class="btn ghost" data-share="${v.id}">📤 Share</button>
@@ -206,18 +210,36 @@ function renderAll() {
 
 // ---------- Navigation ----------
 
-function show(view, push = true) {
+const currentView = () => $('.view.active').dataset.view;
+
+function show(view) {
+  const from = currentView();
+  if (from !== 'video') state.scroll[from] = $('#screen').scrollTop;
+  if (view !== 'video') $('#videoDetail').innerHTML = ''; // stops the player
   $$('.view').forEach(s => s.classList.toggle('active', s.dataset.view === view));
   $$('.tabbar button').forEach(b => b.classList.toggle('active', b.dataset.go === view));
-  if (push && state.history[state.history.length - 1] !== view) state.history.push(view);
-  $('#screen').scrollTop = 0;
-  if (view === 'search') setTimeout(() => $('#searchInput').focus(), 50);
+  $('#screen').scrollTop = view === 'video' ? 0 : state.scroll[view] || 0;
+  if (view === 'search' && !$('#searchInput').value) setTimeout(() => $('#searchInput').focus(), 50);
+}
+
+function goTab(view) {
+  if (view === currentView()) { $('#screen').scrollTo({ top: 0, behavior: 'smooth' }); return; }
+  if (currentView() === 'video') history.replaceState({ view }, '', '#' + view);
+  else history.pushState({ view }, '', '#' + view);
+  show(view);
 }
 
 function openVideo(id) {
+  history.pushState({ view: 'video', id }, '', '#video');
   renderVideo(id);
   show('video');
 }
+
+window.addEventListener('popstate', e => {
+  const s = e.state || { view: 'home' };
+  if (s.view === 'video') renderVideo(s.id);
+  show(s.view);
+});
 
 function toast(msg) {
   const t = $('#toast');
@@ -232,8 +254,11 @@ function toggleFavorite(id) {
   store.set('hamza.favorites', [...state.favorites]);
   toast(state.favorites.has(id) ? 'Added to favorites ⭐' : 'Removed from favorites');
   renderAll();
-  if ($('[data-view="video"]').classList.contains('active')) renderVideo(id);
   renderSearch();
+  $$(`[data-fav="${id}"]`).forEach(b => {
+    const on = state.favorites.has(id);
+    b.textContent = b.classList.contains('fav-btn') ? (on ? '⭐' : '☆') : (on ? '⭐ Saved' : '☆ Favorite');
+  });
 }
 
 async function shareVideo(id) {
@@ -253,21 +278,24 @@ document.addEventListener('click', e => {
   if (!t) return;
   if (t.dataset.fav) { e.stopPropagation(); return toggleFavorite(t.dataset.fav); }
   if (t.dataset.share) return shareVideo(t.dataset.share);
-  if (t.dataset.go) return show(t.dataset.go);
+  if (t.dataset.go) return goTab(t.dataset.go);
   if (t.dataset.platform) { state.platform = t.dataset.platform; renderChips(); return renderFeed(); }
   if (t.dataset.cat) { state.category = state.category === t.dataset.cat ? null : t.dataset.cat; renderCategories(); return renderFeed(); }
   if (t.dataset.id) return openVideo(t.dataset.id);
 });
 
 document.addEventListener('keydown', e => {
-  if (e.key === 'Enter' && e.target.classList.contains('card')) openVideo(e.target.dataset.id);
+  if ((e.key === 'Enter' || e.key === ' ') && (e.target.classList.contains('card') || e.target.id === 'hero')) {
+    e.preventDefault();
+    openVideo(e.target.dataset.id);
+  }
 });
 
 $('#clearCat').addEventListener('click', () => { state.category = null; renderCategories(); renderFeed(); });
 
 $('#backBtn').addEventListener('click', () => {
-  state.history.pop();
-  show(state.history[state.history.length - 1] || 'home', false);
+  if (history.state && history.state.view === 'video') history.back();
+  else goTab('home');
 });
 
 $('#searchInput').addEventListener('input', renderSearch);
@@ -324,5 +352,6 @@ if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
 }
 
+history.replaceState({ view: 'home' }, '', location.pathname + location.search);
 renderAll();
 renderSearch();

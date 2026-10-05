@@ -21,19 +21,19 @@
     <main id="screen">
       <!-- Home -->
       <section class="view active" data-view="home">
-        <div class="hero" id="hero"></div>
+        <div class="hero" id="hero" role="button" tabindex="0"></div>
         <div class="chips" id="platformChips"></div>
         <h2 class="section-title">Categories</h2>
         <div class="cats" id="categoryList"></div>
+        <div class="row-title"><h2 class="section-title" id="feedTitle">All Videos</h2><button class="link" id="clearCat" hidden>Clear ✕</button></div>
+        <div class="grid" id="feed"></div>
         <h2 class="section-title">Follow Hamza Cartoon World</h2>
         <div class="socials" id="socials"></div>
-        <div class="row-title"><h2 class="section-title" id="feedTitle">Latest Videos</h2><button class="link" id="clearCat" hidden>Clear ✕</button></div>
-        <div class="grid" id="feed"></div>
       </section>
 
       <!-- Search -->
       <section class="view" data-view="search">
-        <input class="search" id="searchInput" type="search" placeholder="Search videos… (e.g. dua, roza)" autocomplete="off" />
+        <input class="search" id="searchInput" type="search" placeholder="Search videos… (e.g. chori, norway)" aria-label="Search videos" autocomplete="off" />
         <div class="grid" id="searchResults"></div>
       </section>
 
@@ -66,13 +66,13 @@
       </section>
     </main>
 
-    <nav class="tabbar">
+    <nav class="tabbar" aria-label="Main">
       <button data-go="home" class="active"><span>🏠</span>Home</button>
       <button data-go="search"><span>🔍</span>Search</button>
       <button data-go="favorites"><span>⭐</span>Favorites</button>
       <button data-go="admin"><span>➕</span>Admin</button>
     </nav>
-    <div class="toast" id="toast"></div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
   </div>
 
   <script src="data.js"></script>
