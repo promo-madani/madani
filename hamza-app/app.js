@@ -21,8 +21,12 @@ const state = {
   history: ['home']
 };
 
-const allVideos = () =>
-  [...state.added, ...DEMO_VIDEOS].sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
+// Newest admin additions first, then the YouTube catalog, then demo items.
+const allVideos = () => [
+  ...[...state.added].sort((a, b) => b.publishedAt.localeCompare(a.publishedAt)),
+  ...YOUTUBE_VIDEOS,
+  ...DEMO_VIDEOS
+];
 
 const escapeHtml = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
@@ -35,7 +39,6 @@ function detectPlatform(url) {
   if (/(^|\.)facebook\.com$|^fb\.watch$/.test(host)) return 'facebook';
   if (/(^|\.)tiktok\.com$/.test(host)) return 'tiktok';
   if (/(^|\.)instagram\.com$/.test(host)) return 'instagram';
-  if (/^(twitter|x)\.com$/.test(host)) return 'x';
   if (/^threads\.(net|com)$/.test(host)) return 'threads';
   return null;
 }
@@ -74,7 +77,16 @@ function placeholderThumb(video, withTitle = true) {
   return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
 }
 
-const thumbOf = v => v.thumbnail || placeholderThumb(v);
+// Falls back to the generated thumbnail if a remote image fails (offline, blocked, removed).
+const imgTag = (v, withTitle = true) =>
+  `<img loading="lazy" src="${v.thumbnail || placeholderThumb(v, withTitle)}" alt="" data-fallback="${v.id}" data-title="${withTitle}" />`;
+
+document.addEventListener('error', e => {
+  const img = e.target;
+  if (img.tagName !== 'IMG' || !img.dataset.fallback || img.dataset.failed) return;
+  const v = allVideos().find(x => x.id === img.dataset.fallback);
+  if (v) { img.dataset.failed = '1'; img.src = placeholderThumb(v, img.dataset.title === 'true'); }
+}, true);
 
 // ---------- Rendering ----------
 
@@ -83,12 +95,12 @@ function cardHtml(v) {
   const fav = state.favorites.has(v.id);
   return `<article class="card" data-id="${v.id}" role="button" tabindex="0">
     <div class="thumb">
-      <img loading="lazy" src="${thumbOf(v)}" alt="" />
+      ${imgTag(v)}
       <span class="badge" style="background:${p.color}">${p.icon} ${p.name}</span>
       ${v.duration ? `<span class="dur">${v.duration}</span>` : ''}
     </div>
     <button class="fav-btn" data-fav="${v.id}" aria-label="Favorite">${fav ? '⭐' : '☆'}</button>
-    <div class="meta"><h4>${escapeHtml(v.title)}</h4><small>${categoryName(v.category)} · ${formatDate(v.publishedAt)}</small></div>
+    <div class="meta"><h4>${escapeHtml(v.title)}</h4><small>${[categoryName(v.category), formatDate(v.publishedAt)].filter(Boolean).join(' · ')}</small></div>
   </article>`;
 }
 
@@ -97,14 +109,14 @@ function renderGrid(el, videos, emptyText) {
 }
 
 const categoryName = id => (CATEGORIES.find(c => c.id === id) || {}).name || '';
-const formatDate = d => new Date(d + 'T00:00:00').toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+const formatDate = d => d && new Date(d + 'T00:00:00').toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
 
 function renderHero() {
   const vids = allVideos();
   const v = vids.find(x => x.featured) || vids[0];
   if (!v) return;
   $('#hero').dataset.id = v.id;
-  $('#hero').innerHTML = `<img src="${v.thumbnail || placeholderThumb(v, false)}" alt="" />
+  $('#hero').innerHTML = `${imgTag(v, false)}
     <div class="overlay"><span class="tag">★ NEW EPISODE</span><h3>${escapeHtml(v.title)}</h3></div>`;
 }
 
@@ -167,12 +179,12 @@ function renderVideo(id) {
   const ytId = v.platform === 'youtube' && v.url ? youtubeId(v.url) : null;
   const player = ytId
     ? `<iframe src="https://www.youtube-nocookie.com/embed/${ytId}?rel=0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen title="${escapeHtml(v.title)}"></iframe>`
-    : `<img src="${thumbOf(v)}" alt="" />`;
+    : imgTag(v);
   const fav = state.favorites.has(v.id);
   $('#videoDetail').innerHTML = `<div class="detail">
     <div class="player">${player}</div>
     <h2>${escapeHtml(v.title)}</h2>
-    <p class="info">${p.icon} ${p.name} · ${categoryName(v.category)} · ${formatDate(v.publishedAt)}</p>
+    <p class="info">${[`${p.icon} ${p.name}`, categoryName(v.category), formatDate(v.publishedAt)].filter(Boolean).join(' · ')}</p>
     <div class="actions">
       ${v.url && !ytId ? `<a class="btn" href="${escapeHtml(v.url)}" target="_blank" rel="noopener">Open in ${p.name} ↗</a>` : ''}
       ${v.demo && officialUrl(v.platform) ? `<a class="btn" href="${officialUrl(v.platform)}" target="_blank" rel="noopener">Visit Hamza on ${p.name} ↗</a>` : ''}
