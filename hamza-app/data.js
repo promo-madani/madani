@@ -26,23 +26,21 @@ const CATEGORIES = [
 ];
 
 // Popular Hamza Islahi Cartoon episodes on YouTube, chosen by the channel team.
-// Titles are placeholders until confirmed; the real app gets titles from the YouTube Data API sync.
+// Titles, durations and view counts are from the channel page (Oct 2026);
+// the real app gets these from the YouTube Data API sync.
 const YOUTUBE_VIDEOS = [
-  '8XqLyAAUGSk',
-  'nQmpF0a3FJI',
-  'nt6_uhLKf3k',
-  'ZOs9dI76TWI',
-  'FPCsPN_J6Bs',
-  '8pwVrI7KIM4'
-].map((id, i) => ({
+  ['8XqLyAAUGSk', 'Hamza Ka Norway Adventure',                     'learning', '✈️', '4:27', '4.6K'],
+  ['nQmpF0a3FJI', 'Dhongi Baba Sab Loot Kar Le Gaya',              'stories',  '🧙', '8:08', '83K', true],
+  ['nt6_uhLKf3k', 'Ghar Me Chori Hogi',                            'stories',  '🏠', '3:00', '8.1K'],
+  ['ZOs9dI76TWI', 'Hamza Apny Dant Kis Tarhan Protect Karta Hai?', 'learning', '🦷', '3:57', '12K'],
+  ['FPCsPN_J6Bs', 'Bachay Park Me Home Work Kun Karrhy Hain?',     'manners',  '📚', '6:21', '12K'],
+  ['8pwVrI7KIM4', 'Hamza Nay Khullay Paison Ka Kya Kiya?',         'manners',  '🪙', '3:13', '10K']
+].map(([id, title, category, emoji, duration, views, featured = false]) => ({
   id: 'yt-' + id,
   platform: 'youtube',
   url: `https://www.youtube.com/watch?v=${id}`,
   thumbnail: `https://i.ytimg.com/vi/${id}/hqdefault.jpg`,
-  title: `Popular Episode ${i + 1}`,
-  category: 'stories',
-  emoji: '⭐',
-  featured: i === 0
+  title, category, emoji, duration, views, featured
 }));
 
 // Demo entries for other platforms: titles and thumbnails are placeholders, url is empty.

@@ -44,7 +44,7 @@ installed on a phone via "Add to Home Screen" (it's a PWA).
 | **Admin** | Paste any video link → platform auto-detected → thumbnail fetched (YouTube instantly, TikTok via oEmbed) → saved to the feed |
 
 **Prototype-only shortcuts that IT must replace:**
-- `YOUTUBE_VIDEOS` in `data.js` holds 6 popular episodes chosen by the channel team. Their titles are placeholders ("Popular Episode 1–6") and category is set to Islahi Stories; the YouTube API sync supplies real titles, and the popular list can come from `search.list?channelId=…&order=viewCount`.
+- `YOUTUBE_VIDEOS` in `data.js` holds 6 real episodes chosen by the channel team, with titles, durations and view counts copied from the channel page. The production app replaces this list with the YouTube API sync; the popular list can come from `search.list?channelId=…&order=viewCount`.
 - Videos for other platforms in `data.js` are **demo placeholders** (generated thumbnails, no real links).
 - Admin-added videos and favorites live in the browser's `localStorage`, so each phone sees only its own additions.
 - Admin has no login.
@@ -77,6 +77,7 @@ installed on a phone via "Add to Home Screen" (it's a PWA).
   "thumbnail": "https://i.ytimg.com/vi/XXXXXXXXXXX/hqdefault.jpg",
   "category": "stories | manners | duas | ramadan | learning | shorts",
   "duration": "8:12",
+  "views": "83K",
   "publishedAt": "2026-10-03T10:00:00Z",
   "featured": false,
   "active": true

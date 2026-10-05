@@ -99,7 +99,7 @@ function cardHtml(v) {
       ${v.duration ? `<span class="dur">${v.duration}</span>` : ''}
     </div>
     <button class="fav-btn" data-fav="${v.id}" aria-label="Favorite">${fav ? '⭐' : '☆'}</button>
-    <div class="meta"><h4>${escapeHtml(v.title)}</h4><small>${[categoryName(v.category), formatDate(v.publishedAt)].filter(Boolean).join(' · ')}</small></div>
+    <div class="meta"><h4>${escapeHtml(v.title)}</h4><small>${[categoryName(v.category), v.views && `${v.views} views`, formatDate(v.publishedAt)].filter(Boolean).join(' · ')}</small></div>
   </article>`;
 }
 
@@ -183,7 +183,7 @@ function renderVideo(id) {
   $('#videoDetail').innerHTML = `<div class="detail">
     <div class="player">${player}</div>
     <h2>${escapeHtml(v.title)}</h2>
-    <p class="info">${[`${p.icon} ${p.name}`, categoryName(v.category), formatDate(v.publishedAt)].filter(Boolean).join(' · ')}</p>
+    <p class="info">${[`${p.icon} ${p.name}`, categoryName(v.category), v.views && `${v.views} views`, formatDate(v.publishedAt)].filter(Boolean).join(' · ')}</p>
     <div class="actions">
       ${v.url && !ytId ? `<a class="btn" href="${escapeHtml(v.url)}" target="_blank" rel="noopener">Open in ${p.name} ↗</a>` : ''}
       ${v.demo && officialUrl(v.platform) ? `<a class="btn" href="${officialUrl(v.platform)}" target="_blank" rel="noopener">Visit Hamza on ${p.name} ↗</a>` : ''}
