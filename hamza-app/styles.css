@@ -100,6 +100,17 @@ img { display: block; max-width: 100%; }
 .cat small { display: block; color: var(--muted); font-weight: 400; margin-top: 2px; font-size: 11px; }
 .cat.active { border-color: var(--green); box-shadow: 0 0 0 2px var(--green) inset; }
 
+/* Official accounts */
+.socials { display: grid; gap: 8px; }
+.social {
+  display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 14px;
+  background: var(--card); border: 1px solid var(--line); color: var(--text); text-decoration: none;
+}
+.social i { font-style: normal; width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; color: #fff; font-weight: 700; }
+.social b { display: block; font-size: 14px; }
+.social small { color: var(--muted); font-size: 12px; }
+.social em { margin-left: auto; font-style: normal; color: var(--green); font-weight: 600; font-size: 13px; }
+
 /* Video cards */
 .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .card { background: var(--card); border-radius: 14px; overflow: hidden; border: 1px solid var(--line); text-align: left; position: relative; }

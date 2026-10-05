@@ -10,6 +10,13 @@ const PLATFORMS = {
   threads:   { name: 'Threads',   color: '#333333', icon: '@' }
 };
 
+// Official Hamza Cartoon World accounts.
+const OFFICIAL_ACCOUNTS = [
+  { platform: 'youtube',   handle: '@HamzaCartoon-World', url: 'https://www.youtube.com/@HamzaCartoon-World' },
+  { platform: 'facebook',  handle: 'HamzaCartoonWorld',   url: 'https://www.facebook.com/HamzaCartoonWorld/' },
+  { platform: 'instagram', handle: '@hamzacartoonworld',  url: 'https://www.instagram.com/hamzacartoonworld/' }
+];
+
 const CATEGORIES = [
   { id: 'stories',  name: 'Islahi Stories', urdu: 'اصلاحی کہانیاں', emoji: '📖' },
   { id: 'manners',  name: 'Good Manners',   urdu: 'اچھے اخلاق',      emoji: '🤝' },

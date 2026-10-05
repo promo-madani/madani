@@ -122,6 +122,17 @@ function renderCategories() {
   $('#addCat').innerHTML = CATEGORIES.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
 }
 
+const officialUrl = platform => (OFFICIAL_ACCOUNTS.find(a => a.platform === platform) || {}).url;
+
+function renderSocials() {
+  $('#socials').innerHTML = OFFICIAL_ACCOUNTS.map(a => {
+    const p = PLATFORMS[a.platform];
+    return `<a class="social" href="${a.url}" target="_blank" rel="noopener">
+      <i style="background:${p.color}">${p.icon}</i>
+      <span><b>${p.name}</b><small>${escapeHtml(a.handle)}</small></span><em>Follow ↗</em></a>`;
+  }).join('');
+}
+
 function renderFeed() {
   const vids = allVideos().filter(v =>
     (state.platform === 'all' || v.platform === state.platform) &&
@@ -164,6 +175,7 @@ function renderVideo(id) {
     <p class="info">${p.icon} ${p.name} · ${categoryName(v.category)} · ${formatDate(v.publishedAt)}</p>
     <div class="actions">
       ${v.url && !ytId ? `<a class="btn" href="${escapeHtml(v.url)}" target="_blank" rel="noopener">Open in ${p.name} ↗</a>` : ''}
+      ${v.demo && officialUrl(v.platform) ? `<a class="btn" href="${officialUrl(v.platform)}" target="_blank" rel="noopener">Visit Hamza on ${p.name} ↗</a>` : ''}
       <button class="btn ghost" data-fav="${v.id}">${fav ? '⭐ Saved' : '☆ Favorite'}</button>
       <button class="btn ghost" data-share="${v.id}">📤 Share</button>
     </div>
@@ -174,7 +186,7 @@ function renderVideo(id) {
 }
 
 function renderAll() {
-  renderHero(); renderChips(); renderCategories(); renderFeed(); renderFavorites(); renderAdmin();
+  renderHero(); renderChips(); renderCategories(); renderSocials(); renderFeed(); renderFavorites(); renderAdmin();
 }
 
 // ---------- Navigation ----------

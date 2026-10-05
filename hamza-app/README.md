@@ -8,6 +8,17 @@ into one feed, each shown with a thumbnail.
 > ek working demo. Videos abhi demo data hain. IT section is document ko follow karke asli
 > app (backend + Play Store) banayega.
 
+## Official accounts
+
+| Platform | Account |
+|---|---|
+| YouTube | [@HamzaCartoon-World](https://www.youtube.com/@HamzaCartoon-World) |
+| Facebook | [HamzaCartoonWorld](https://www.facebook.com/HamzaCartoonWorld/) |
+| Instagram | [@hamzacartoonworld](https://www.instagram.com/hamzacartoonworld/) |
+
+These are listed in `OFFICIAL_ACCOUNTS` in `data.js` and shown on the Home screen as
+"Follow Hamza Cartoon World". TikTok, X and Threads accounts still need to be provided.
+
 ## How to run
 
 It's plain HTML/CSS/JS with no build step.
@@ -86,6 +97,14 @@ This is the same shape the prototype uses, so `app.js` rendering logic maps dire
 Link previews (oEmbed / Open Graph) must be fetched **server-side** in a Cloud Function,
 because browsers/apps hit CORS and login walls. Store the thumbnail URL (or a copy in
 Firebase Storage, since some platforms' thumbnail URLs expire, e.g. Instagram and Facebook CDN links).
+
+### Setup for these accounts
+- **YouTube:** resolve the channel ID once with
+  `GET https://www.googleapis.com/youtube/v3/channels?part=contentDetails&forHandle=@HamzaCartoon-World&key=API_KEY`.
+  The response's `contentDetails.relatedPlaylists.uploads` is the playlist the hourly sync reads with `playlistItems.list`.
+- **Facebook + Instagram:** whoever is an admin of the `HamzaCartoonWorld` Facebook Page must create a Meta app,
+  link the `@hamzacartoonworld` Instagram account to the Page (it must be a Business/Creator account),
+  and generate a long-lived Page access token. Store it as a Cloud Functions secret, never in the app.
 
 ### 4. Build steps
 1. Create the Firebase project; set up Firestore security rules (public read, admin-only write).
