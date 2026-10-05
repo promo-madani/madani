@@ -1,0 +1,13 @@
+{
+  "name": "Hamza Islahi Cartoon",
+  "short_name": "Hamza Cartoon",
+  "description": "All Hamza Islahi Cartoon videos from YouTube, Facebook, TikTok and Instagram in one place.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f4fbf6",
+  "theme_color": "#0f7a4f",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

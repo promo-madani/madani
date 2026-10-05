@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="description" content="All Hamza Islahi Cartoon videos from YouTube, Facebook, TikTok and Instagram in one app." />
+  <meta name="theme-color" content="#0f7a4f" />
+  <title>Hamza Islahi Cartoon</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="icon.svg" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="phone">
+    <header class="topbar">
+      <div class="brand"><img src="icon.svg" alt="" /><div><b>Hamza Islahi</b><small>Cartoon</small></div></div>
+      <button class="icon-btn" id="installBtn" hidden>⬇ Install</button>
+    </header>
+
+    <main id="screen">
+      <!-- Home -->
+      <section class="view active" data-view="home">
+        <div class="hero" id="hero" role="button" tabindex="0"></div>
+        <div class="chips" id="platformChips"></div>
+        <h2 class="section-title">Categories</h2>
+        <div class="cats" id="categoryList"></div>
+        <div class="row-title"><h2 class="section-title" id="feedTitle">All Videos</h2><button class="link" id="clearCat" hidden>Clear ✕</button></div>
+        <div class="grid" id="feed"></div>
+        <h2 class="section-title">Follow Hamza Cartoon World</h2>
+        <div class="socials" id="socials"></div>
+      </section>
+
+      <!-- Search -->
+      <section class="view" data-view="search">
+        <input class="search" id="searchInput" type="search" placeholder="Search videos… (e.g. chori, norway)" aria-label="Search videos" autocomplete="off" />
+        <div class="grid" id="searchResults"></div>
+      </section>
+
+      <!-- Favorites -->
+      <section class="view" data-view="favorites">
+        <h2 class="section-title">My Favorites ⭐</h2>
+        <div class="grid" id="favList"></div>
+      </section>
+
+      <!-- Admin -->
+      <section class="view" data-view="admin">
+        <h2 class="section-title">Admin · Add Video</h2>
+        <p class="hint">Paste a video link from any platform. The platform is detected automatically. YouTube thumbnails load instantly; other platforms need the backend in the real app (see README).</p>
+        <form id="addForm" class="form">
+          <label>Video link<input id="addUrl" type="url" required placeholder="https://youtube.com/watch?v=…" /></label>
+          <div class="detected" id="detected">Platform: —</div>
+          <label>Title<input id="addTitle" type="text" required placeholder="Hamza aur …" /></label>
+          <label>Category<select id="addCat"></select></label>
+          <label class="check"><input id="addFeatured" type="checkbox" /> Show as featured (top banner)</label>
+          <button class="btn" type="submit">Save Video</button>
+        </form>
+        <h2 class="section-title">Added by you</h2>
+        <div class="grid" id="adminList"></div>
+      </section>
+
+      <!-- Video detail -->
+      <section class="view" data-view="video">
+        <button class="link back" id="backBtn">← Back</button>
+        <div id="videoDetail"></div>
+      </section>
+    </main>
+
+    <nav class="tabbar" aria-label="Main">
+      <button data-go="home" class="active"><span>🏠</span>Home</button>
+      <button data-go="search"><span>🔍</span>Search</button>
+      <button data-go="favorites"><span>⭐</span>Favorites</button>
+      <button data-go="admin"><span>➕</span>Admin</button>
+    </nav>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
