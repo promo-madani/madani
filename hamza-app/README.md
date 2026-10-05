@@ -35,16 +35,21 @@ installed on a phone via "Add to Home Screen" (it's a PWA).
 
 ## What the prototype shows
 
+The whole interface is in **Urdu, right-to-left**, following the approved designs in `design/`.
+
 | Screen | Features |
 |---|---|
-| **Home** | "Most watched" banner, platform filter chips (All / YouTube / Facebook / TikTok / Instagram), categories in English + Urdu with video counts (empty ones hidden), video grid with thumbnail, platform badge, duration and views, official account links |
-| **Video page** | YouTube plays inside the app (privacy-enhanced embed) with a "Watch on YouTube" link; other platforms show an "Open in …" button; Favorite, Share, "More like this". The phone's back button returns to the previous screen and stops the video |
-| **Search** | Search by title, category or platform |
-| **Favorites** | Saved on the device |
+| **Splash** (`design/splash.jpg`) | Emblem, Hamza and the "حمزہ اصلاحی کارٹون" title, shown for ~1.4 s on every launch |
+| **Welcome** (`design/welcome.jpg`) | First launch only: Hamza, "حمزہ کارٹون" logo, tagline, **شروع کریں** (go to onboarding) and **کارٹون دیکھیں** (skip to Home) |
+| **Onboarding** (`design/onboarding.jpg`) | 3 swipeable slides with dots, **آگے بڑھیں** / **شروع کریں** and **چھوڑیں**; can be replayed from Profile |
+| **Home** (`design/home-screen.jpg`) | Teal header with Hamza avatar and brand, featured video with play button, platform chips (سب / یوٹیوب / فیس بک / ٹک ٹاک / انسٹاگرام), horizontal rails: **نئی کہانیاں**, **سب سے زیادہ دیکھی گئی** (sorted by views) and one rail per category, each with **سب دیکھیں**; official account links at the bottom |
+| **Video page** | YouTube plays inside the app (privacy-enhanced embed) with a "watch on YouTube" link; other platforms open in their app; پسندیدہ, شیئر کریں, مزید ویڈیوز. Back (in-app or phone) returns to the previous screen and stops the video |
+| **Search / Favorites** | Search Urdu and Roman titles, categories and platforms; favorites saved on the device |
+| **Profile** | App info, follow links, install the app, replay intro, and the team-only **ویڈیو شامل کریں** (Admin) |
 | **Admin** | Paste any video link → platform auto-detected → thumbnail fetched (YouTube instantly, TikTok via oEmbed) → saved to the feed |
 
 **Prototype-only shortcuts that IT must replace:**
-- `YOUTUBE_VIDEOS` in `data.js` holds 6 real episodes chosen by the channel team, with titles, durations and view counts copied from the channel page. The production app replaces this list with the YouTube API sync; the popular list can come from `search.list?channelId=…&order=viewCount`.
+- `YOUTUBE_VIDEOS` in `data.js` holds 6 real episodes chosen by the channel team, with titles, durations and view counts copied from the channel page. The Urdu-script titles (`titleUr`) are transliterations of the Roman Urdu titles and should be checked by the content team. The production app replaces this list with the YouTube API sync; the popular list can come from `search.list?channelId=…&order=viewCount`.
 - Videos for other platforms in `data.js` are **demo placeholders** (generated thumbnails, no real links) and are labelled DEMO in the app.
 - Admin-added videos and favorites live in the browser's `localStorage`, so each phone sees only its own additions.
 - Admin has no login.
@@ -54,11 +59,12 @@ installed on a phone via "Add to Home Screen" (it's a PWA).
 | File | Purpose |
 |---|---|
 | `index.html` | Screens and layout |
-| `styles.css` | Design (brand colors: green `#0f7a4f`, gold `#ffd166`; dark mode supported) |
+| `styles.css` | Design (teal `#0f6b66`, gold `#ffd166`, Noto Naskh Arabic / Noto Nastaliq Urdu fonts; dark mode supported) |
 | `app.js` | Logic: rendering, filters, link detection, thumbnails, favorites, share |
-| `data.js` | Platforms, categories, demo videos (replace with the API) |
+| `data.js` | Platforms, categories, videos with Urdu titles, onboarding slides (replace videos with the API) |
 | `manifest.json`, `sw.js` | PWA install + offline shell |
-| `assets/` | Hamza artwork: `hamza-original.jpg` (source, 5504×3072, not loaded by the app), `hamza.webp`/`.jpg` (welcome card), `icon-192/512.png`, `icon-maskable-512.png`, `apple-touch-icon.png` (app icons cropped from the source) |
+| `assets/` | Artwork cropped from the designs: splash (`splash-*.webp`), welcome (`welcome-*.webp`), onboarding (`onboarding-1..3.webp`), app icons (`icon-192/512.png`, `icon-maskable-512.png`, `apple-touch-icon.png` from `design/app-icon.jpg`); `hamza-original.jpg` is the full-size character source (not loaded by the app) |
+| `design/` | The approved design mockups (home, onboarding, splash, welcome, app icon). The crops in `assets/` come from these 1376×768 mockups, so ask the design team for the original high-resolution layers before store release |
 
 ## Production plan for the IT section
 
