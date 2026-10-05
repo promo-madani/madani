@@ -59,15 +59,15 @@ the main channel's expectation story-first.
 ## Episode backlog (highest potential first)
 
 1. **Dada Jan Ki Awaaz… Lekin Phone Par Kaun Tha?** — AI voice-clone
-   emergency call; Dada Jan is sitting right there. Text: DADA JAN KI FAKE CALL!
-2. **Hamza Ki Fake Video Kis Ne Banai?** — deepfake goes viral. Text: HAMZA KI FAKE VIDEO?
-3. **Free Diamonds Ke Chakkar Mein Hamza Phans Gaya!** — game-reward account/password scam. Text: FREE DIAMONDS KA DHOKA!
-4. 1 Din Mein Sab Theek? Dhongi Hakeem Ka Raaz — fake miracle medicine. Text: DHONGI HAKEEM KI JADUI DAWA?
-5. Hamza Ke Ghar Aaya Ek Ajeeb Parcel! — unordered COD parcel. Text: PARCEL KIS NE BHEJA?
+   emergency call; Dada Jan is sitting right there. Text: دادا جان کی جعلی کال!
+2. **Hamza Ki Fake Video Kis Ne Banai?** — deepfake goes viral. Text: حمزہ کی جعلی ویڈیو کس نے بنائی؟
+3. **Free Diamonds Ke Chakkar Mein Hamza Phans Gaya!** — game-reward account/password scam. Text: فری ڈائمنڈز کا دھوکا!
+4. 1 Din Mein Sab Theek? Dhongi Hakeem Ka Raaz — fake miracle medicine. Text: ڈھونگی حکیم کی جادوئی دوا؟
+5. Hamza Ke Ghar Aaya Ek Ajeeb Parcel! — unordered COD parcel. Text: پارسل کس نے بھیجا؟
 6. Chanda Maangne Wala Sach Bol Raha Tha? — fake charity collector.
 7. School Ke Bahar Hamza Ko Kaun Bula Raha Tha? — stranger: "Dada Jan ne bheja hai."
-8. Is QR Code Ko Scan Karna Mehnga Par Gaya! — free-gift poster QR. Text: QR CODE SCAN MAT KARO!
-9. Lift Khud Ba Khud Kyun Chal Rahi Thi? — scary mystery, logical explanation. Text: LIFT MEIN KAUN HAI?
+8. Is QR Code Ko Scan Karna Mehnga Par Gaya! — free-gift poster QR. Text: یہ QR کوڈ اسکین مت کرنا!
+9. Lift Khud Ba Khud Kyun Chal Rahi Thi? — scary mystery, logical explanation. Text: لفٹ میں کون ہے؟
 10. Hamza Ne 10 Lakh Jeet Liye? — fake lucky draw, "pay the fee first".
 
 Build a **cluster** from Dhongi Baba so YouTube can chain recommendations:
@@ -111,11 +111,15 @@ Branding (`| Hamza Cartoon World`) only at the end, if at all.
 - **Thumbnail text must define the story on its own** — a complete phrase
   that names the subject (who / what / where), never a half phrase that only
   makes sense with the title. Usually 3–6 words, a question or exclamation.
-  - ❌ "YEH KIS NE BHEJA?" → ✅ "PARCEL KIS NE BHEJA?"
-  - ❌ "ANDAR KYA HAI?" → ✅ "AHRAM-E-MISR KE ANDAR KYA HAI?"
-  - ❌ "KHO GAYA!" → ✅ "HAMZA NORWAY MEIN KHO GAYA!"
-  - ❌ "KAUN HAI?" → ✅ "LIFT MEIN KAUN HAI?"
-  - ❌ "FAKE CALL!" → ✅ "DADA JAN KI FAKE CALL!"
+- **Thumbnail text is always in Urdu script (اردو), not Roman Urdu or
+  English.** Titles stay in Roman Urdu (search), thumbnail text in Urdu.
+  Use common Urdu spellings; English loanwords written in Urdu (پارسل، ویڈیو،
+  لفٹ). Keep brand-like acronyms (QR) as is.
+  - ❌ "یہ کس نے بھیجا؟" → ✅ "پارسل کس نے بھیجا؟"
+  - ❌ "اندر کیا ہے؟" → ✅ "اہرامِ مصر کے اندر کیا ہے؟"
+  - ❌ "کھو گیا!" → ✅ "حمزہ ناروے میں کھو گیا!"
+  - ❌ "کون ہے؟" → ✅ "لفٹ میں کون ہے؟"
+  - ❌ "جعلی کال!" → ✅ "دادا جان کی جعلی کال!"
   - Test: someone who sees only the thumbnail (no title) must understand the
     story question. Still short enough to read on a phone — never the whole
     title, never over Hamza's face. Text and title should complement each
@@ -133,7 +137,7 @@ This is the look the user wants on every thumbnail — match it:
   - Dada Jan: long white beard, white turban, round glasses, white kurta, warm kind face.
   - Little sister (when present): white hijab, white dress.
   - Villains (thief, Dhongi Baba, scammer): exaggerated cartoon — sly grin, raised eyebrow, dark/earthy clothes, black mask for thieves.
-- **Text:** huge chunky rounded cartoon 3D lettering, Title Case or CAPS Roman Urdu,
+- **Text:** Urdu script (right-to-left), huge bold 3D lettering in a thick, heavy Urdu display style (bold Naskh or chunky Nastaliq),
   fill = white or yellow→orange gradient, **thick red or dark-blue outline** plus a
   dark drop shadow; 2–3 stacked lines, slightly arched/tilted, bouncy baseline;
   occupies the top-right ~40–50% of the frame. Yellow burst/motion lines and
@@ -158,8 +162,8 @@ CHARACTERS IN SCENE: [Hamza / Hamza + Dada Jan / + little sister / + villain]
 HAMZA'S EMOTION: [shocked / worried / curious / amazed / happy / confused]
 KEY SUBJECT (right side): [villain / object / place — describe]
 LOCATION: [specific setting]
-TEXT: "[complete story-defining Roman Urdu phrase, 3–7 words]"
-TEXT LINES: [how to split it into 2–3 lines]
+TEXT (Urdu script): "[complete story-defining Urdu phrase, 3–7 words]"
+TEXT LINES: [how to split it into 2–3 lines, right-to-left]
 
 CHARACTER DESIGN (keep consistent with the channel):
 Hamza: a cute 8–10 year old Muslim boy, big round shiny brown eyes, rosy cheeks, white turban fully covering his hair, white kurta shalwar kameez, red scarf wrapped around his neck.
@@ -174,11 +178,12 @@ TEXT in the TOP-RIGHT area, taking about 40–50% of the frame, never covering a
 Maximum 3 main elements: Hamza (+ family), key subject, text.
 
 THUMBNAIL TEXT STYLE:
-Huge chunky rounded cartoon 3D lettering, exactly the words of TEXT, split into the lines given.
+Urdu script written right-to-left, with correctly joined letters, exactly the words of TEXT, split into the lines given.
+Huge, heavy, bold Urdu display lettering (thick bold Naskh / chunky Nastaliq style) rendered as glossy 3D text.
 Fill: white or bright yellow-to-orange gradient. Thick red (or dark blue) outline, dark drop shadow, slight glossy highlight.
 Slightly arched and tilted with a playful bouncy baseline.
 Yellow burst lines and small sparkles around the text; optionally one small emoji-style icon related to the story beside or inside the text.
-Perfect spelling, crisp edges, readable on a small mobile screen.
+Correct Urdu spelling and letter joining, crisp edges, readable on a small mobile screen.
 
 BACKGROUND & LIGHTING:
 Bright, saturated, detailed LOCATION background with soft depth of field, warm sunlight, cheerful colors.
@@ -196,13 +201,22 @@ No extra limbs or fingers. No distorted faces. No blurry image. No watermark or 
 16:9 YouTube thumbnail, 1280x720, ultra sharp, high detail.
 ```
 
-Example texts (complete, story-defining): DADA JAN KI FAKE CALL!,
-PARCEL KIS NE BHEJA?, AHRAM-E-MISR KE ANDAR KYA HAI?, QR CODE SCAN MAT KARO!,
-LIFT MEIN KAUN HAI?, GHAR MEIN CHOR!, DHONGI BABA KA RAAZ!,
-HAMZA NORWAY MEIN KHO GAYA!
+Example texts (Urdu, complete, story-defining): دادا جان کی جعلی کال!،
+پارسل کس نے بھیجا؟، اہرامِ مصر کے اندر کیا ہے؟، یہ QR کوڈ اسکین مت کرنا!،
+لفٹ میں کون ہے؟، گھر میں چوری ہو گئی!، ڈھونگی بابا سب لوٹ کر لے گیا!،
+حمزہ ناروے میں کھو گیا!
+
+**Urdu text with AI image tools:** most image generators misspell or break
+Urdu letters. Always also give the "no-text" fallback: replace the THUMBNAIL
+TEXT STYLE block with "Leave the top-right area empty (clean sky/wall) for
+text to be added later. Do not render any text or letters." Then the text is
+added in Canva/Photoshop/Pixellab with a bold Urdu font (e.g. Noto Nastaliq
+Urdu Bold, Jameel Noori Nastaleeq, or a heavy Naskh), yellow→orange fill,
+thick red outline, drop shadow, slight arc — matching the house style.
 
 When asked for a thumbnail, output the full master prompt with every [ ]
-field filled in (always in the house style above), plus a one-line layout
+field filled in (always in the house style above, text in Urdu script),
+the no-text fallback line, plus a one-line layout
 note (left / right / text position).
 
 ## Description template
