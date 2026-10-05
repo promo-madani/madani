@@ -422,7 +422,9 @@ $('#installBtn').addEventListener('click', async () => {
 });
 
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
+  // sw.js reloads open pages itself when an update activates; updateViaCache 'none' makes the
+  // browser check for a new sw.js on every visit instead of trusting its HTTP cache.
+  window.addEventListener('load', () => navigator.serviceWorker.register('sw.js', { updateViaCache: 'none' }).catch(() => {}));
 }
 
 history.replaceState({ view: 'home' }, '', location.pathname + location.search);

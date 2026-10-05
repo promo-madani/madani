@@ -62,7 +62,7 @@ The whole interface is in **Urdu, right-to-left**, following the approved design
 | `styles.css` | Design (teal `#0f6b66`, gold `#ffd166`, Noto Naskh Arabic / Noto Nastaliq Urdu fonts; dark mode supported) |
 | `app.js` | Logic: rendering, filters, link detection, thumbnails, favorites, share |
 | `data.js` | Platforms, categories, videos with Urdu titles, onboarding slides (replace videos with the API) |
-| `manifest.json`, `sw.js` | PWA install + offline shell |
+| `manifest.json`, `sw.js` | PWA install + offline shell. **On every release bump `CACHE` in `sw.js`** (e.g. `hamza-v5` → `hamza-v6`): the new service worker then replaces the old one and reloads open pages, so users see the update on their next open instead of after GitHub Pages' 10-minute browser cache |
 | `assets/` | Artwork cropped from the designs: splash (`splash-*.webp`), welcome (`welcome-*.webp`), onboarding (`onboarding-1..3.webp`), app icons (`icon-192/512.png`, `icon-maskable-512.png`, `apple-touch-icon.png` from `design/app-icon.jpg`); `hamza-original.jpg` is the full-size character source (not loaded by the app) |
 | `design/` | The approved design mockups (home, onboarding, splash, welcome, app icon). The crops in `assets/` come from these 1376×768 mockups, so ask the design team for the original high-resolution layers before store release |
 
