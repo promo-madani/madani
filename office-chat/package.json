@@ -1,0 +1,13 @@
+{
+  "name": "ai-department-office-chat",
+  "version": "1.0.0",
+  "description": "Office LAN messenger for the AI department: channels, direct messages, file/image/video sharing. No dependencies.",
+  "main": "server.js",
+  "private": true,
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

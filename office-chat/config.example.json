@@ -1,0 +1,13 @@
+{
+  "teamName": "AI Department",
+  "passcode": "change-me",
+  "port": 8080,
+  "maxUploadMB": 2048,
+  "backupDir": "backups",
+  "backupDays": 30,
+  "admins": [],
+  "defaultChannels": [
+    { "id": "ai-department", "topic": "Whole AI department: announcements and daily chat" },
+    { "id": "resources", "topic": "Share datasets, models, papers, prompts and docs" }
+  ]
+}

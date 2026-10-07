@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Set up AI Dept Chat</title>
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body class="setup-page">
+  <main class="setup-card">
+    <img src="/icon.svg" alt="" width="56" height="56">
+    <h1>One-time setup for this computer</h1>
+
+    <div id="checking" class="setup-checking">Checking this computer…</div>
+
+    <div id="done" hidden>
+      <p class="setup-ok">✅ This computer is set up. The chat connection is secure.</p>
+      <a class="btn primary" id="openChatDone" href="/">Open the chat</a>
+    </div>
+
+    <div id="steps" hidden>
+      <p class="muted">This takes about one minute. It makes the chat connection secure, which browsers
+        require for <b>voice messages, calls and screen sharing</b>. You only do it once per computer.</p>
+
+      <ol class="setup-steps">
+        <li>
+          <b>Download the chat certificate</b>
+          <a class="btn primary" href="/ca.crt" download>⬇ Download certificate</a>
+        </li>
+        <li>
+          <b>Install it (Windows)</b>
+          <ol>
+            <li>Open the downloaded file <i>AI-Department-Chat-Certificate.crt</i>.</li>
+            <li>Click <b>Install Certificate…</b> then choose <b>Current User</b> and click <b>Next</b>.</li>
+            <li>Choose <b>Place all certificates in the following store</b>, click <b>Browse…</b>,
+              select <b>Trusted Root Certification Authorities</b>, then <b>OK</b> and <b>Next</b>.</li>
+            <li>Click <b>Finish</b>, then <b>Yes</b> on the security question.</li>
+          </ol>
+        </li>
+        <li>
+          <b>Close all Chrome / Edge windows and open the chat again</b>
+          <a class="btn" id="openChat" href="/">Open the chat</a>
+        </li>
+      </ol>
+
+      <details>
+        <summary>Android phone</summary>
+        <ol>
+          <li>Tap <b>Download certificate</b> above.</li>
+          <li>Open <b>Settings → Security → Encryption &amp; credentials → Install a certificate → CA certificate</b>.</li>
+          <li>Tap <b>Install anyway</b> and pick the downloaded file. Then open the chat again.</li>
+        </ol>
+      </details>
+      <details>
+        <summary>iPhone / iPad</summary>
+        <ol>
+          <li>Open this page in <b>Safari</b> and tap <b>Download certificate</b>, then <b>Allow</b>.</li>
+          <li>Open <b>Settings → Profile Downloaded → Install</b>.</li>
+          <li>Open <b>Settings → General → About → Certificate Trust Settings</b> and switch it on.</li>
+        </ol>
+      </details>
+      <details>
+        <summary>Mac</summary>
+        <ol>
+          <li>Open the downloaded file. It opens in <b>Keychain Access</b>.</li>
+          <li>Double-click <i>AI Department Chat CA</i>, open <b>Trust</b>, and set
+            <b>When using this certificate</b> to <b>Always Trust</b>.</li>
+        </ol>
+      </details>
+
+      <p class="setup-skip">
+        Can't install it right now? <a id="skip" href="/">Continue anyway</a>.
+        The browser will show a "Not private" warning: click <b>Advanced</b> → <b>Proceed</b>.
+        Chat works, but the warning comes back each time.
+      </p>
+    </div>
+  </main>
+  <script src="/setup.js"></script>
+</body>
+</html>
