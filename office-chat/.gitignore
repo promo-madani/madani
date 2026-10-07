@@ -1,4 +1,5 @@
-# Chat history, accounts and uploaded files live here. Back it up; never commit it.
+# Chat history, accounts, certificates and uploaded files live here. Back them up; never commit them.
 data/
+backups/
 config.json
 *.pem

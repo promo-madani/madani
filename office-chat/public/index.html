@@ -14,7 +14,7 @@
     <form id="loginForm" class="login-card" autocomplete="on">
       <img class="login-logo" src="/icon.svg" alt="" width="56" height="56">
       <h1 id="loginTeam">AI Department</h1>
-      <p class="muted">Office messenger: chat and share files, images and videos over the office network.</p>
+      <p class="muted">Office messenger: chat, calls and file sharing over the office network.</p>
 
       <label>Username
         <input name="username" required autocomplete="username" autocapitalize="words" spellcheck="false"
@@ -48,7 +48,11 @@
         <img src="/icon.svg" alt="" width="36" height="36">
         <div><b id="teamName">AI Department</b><small id="onlineCount"></small></div>
       </header>
-      <input id="search" class="search" type="search" placeholder="Search people and channels" aria-label="Search people and channels">
+      <input id="search" class="search" type="search" placeholder="Find people and channels" aria-label="Find people and channels">
+      <div class="side-actions">
+        <button id="broadcastBtn" class="side-action" type="button" title="Send one message to everyone">📢 Broadcast</button>
+        <button id="adminBtn" class="side-action" type="button" title="Admin panel" hidden>⚙️ Admin</button>
+      </div>
       <nav class="lists" aria-label="Conversations">
         <div class="list-head"><span>Channels</span><button id="newChannel" class="mini-btn" type="button" title="Create a channel" aria-label="Create a channel">+</button></div>
         <ul id="channelList"></ul>
@@ -72,15 +76,40 @@
           <span id="menuBadge" class="badge" hidden></span>
         </button>
         <div class="chat-title"><b id="roomTitle"></b><small id="roomSub"></small></div>
-        <button id="filesBtn" class="icon-btn" type="button" title="Shared files" aria-label="Shared files">
-          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M4 7a2 2 0 0 1 2-2h4l2 2h6a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
-        </button>
+        <div class="head-actions">
+          <button id="voiceCallBtn" class="icon-btn" type="button" title="Voice call" aria-label="Voice call" hidden>
+            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+          </button>
+          <button id="videoCallBtn" class="icon-btn" type="button" title="Video call" aria-label="Video call" hidden>
+            <svg viewBox="0 0 24 24" width="21" height="21" aria-hidden="true"><rect x="3" y="6" width="13" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 10l5-3v10l-5-3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+          </button>
+          <button id="pinsBtn" class="icon-btn" type="button" title="Pinned messages" aria-label="Pinned messages">
+            <svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true"><path d="M9 4h6l-1 6 4 4H6l4-4zM12 14v7" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg>
+            <span id="pinCount" class="count" hidden></span>
+          </button>
+          <button id="searchBtn" class="icon-btn" type="button" title="Search messages and files" aria-label="Search messages and files">
+            <svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 16l5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+          <button id="filesBtn" class="icon-btn" type="button" title="Shared files" aria-label="Shared files">
+            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M4 7a2 2 0 0 1 2-2h4l2 2h6a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+          </button>
+          <button id="exportBtn" class="icon-btn hide-mobile" type="button" title="Download this chat's history" aria-label="Download chat history">
+            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
       </header>
+      <div id="secureBanner" class="banner" hidden>🔒 Voice messages and calls need the secure connection. <a href="/setup">Set up this computer (1 minute)</a></div>
       <div id="status" class="status" hidden>Connection lost, reconnecting…</div>
 
       <div id="messages" class="messages" aria-live="polite"></div>
       <div id="typing" class="typing"></div>
       <div id="uploads" class="uploads" hidden></div>
+
+      <div id="replyBar" class="reply-bar" hidden>
+        <div class="reply-bar-text"><b id="replyName"></b><span id="replyText"></span></div>
+        <button id="replyCancel" class="mini-btn" type="button" aria-label="Cancel reply">✕</button>
+      </div>
+      <div id="mentionMenu" class="mention-menu" role="listbox" hidden></div>
 
       <form id="composer" class="composer">
         <button id="attachBtn" class="icon-btn" type="button" title="Send files, images or videos" aria-label="Attach files">
@@ -88,18 +117,73 @@
         </button>
         <input id="fileInput" type="file" multiple hidden>
         <textarea id="input" rows="1" maxlength="8000" placeholder="Write a message…" aria-label="Message"></textarea>
+        <button id="micBtn" class="icon-btn" type="button" title="Record a voice message" aria-label="Record a voice message">
+          <svg viewBox="0 0 24 24" width="21" height="21" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
         <button id="sendBtn" class="send" type="submit" aria-label="Send">
           <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M4 12l16-8-6 16-2.5-6.5z" fill="currentColor"/></svg>
         </button>
       </form>
 
+      <div id="recorder" class="recorder" hidden>
+        <button id="recCancel" class="icon-btn" type="button" title="Discard" aria-label="Discard recording">✕</button>
+        <span class="rec-dot" aria-hidden="true"></span>
+        <span id="recTime" class="rec-time">0:00</span>
+        <span class="rec-label">Recording voice message…</span>
+        <button id="recSend" class="send" type="button" aria-label="Send voice message">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M4 12l16-8-6 16-2.5-6.5z" fill="currentColor"/></svg>
+        </button>
+      </div>
+
       <div id="dropZone" class="drop-zone" hidden><div>Drop files to share them here</div></div>
 
-      <aside id="filesPanel" class="files-panel" hidden>
-        <header><b>Shared files</b><button id="filesClose" class="icon-btn" type="button" aria-label="Close">✕</button></header>
-        <ul id="filesList"></ul>
+      <aside id="panel" class="side-panel" hidden>
+        <header><b id="panelTitle"></b><button id="panelClose" class="icon-btn" type="button" aria-label="Close">✕</button></header>
+        <div id="panelSearch" class="panel-search" hidden>
+          <input id="searchInput" type="search" placeholder="Search all your chats and files" aria-label="Search messages">
+        </div>
+        <ul id="panelList"></ul>
       </aside>
     </main>
+  </div>
+
+  <!-- Calls -->
+  <div id="incomingCall" class="incoming" role="alertdialog" aria-labelledby="incomingName" hidden>
+    <span id="incomingAvatar"></span>
+    <div class="incoming-text"><b id="incomingName"></b><small id="incomingKind"></small></div>
+    <button id="declineBtn" class="call-btn red" type="button" title="Decline" aria-label="Decline">
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M3 14c5-5 13-5 18 0l-2.5 2.5-3.5-2v-3a10 10 0 0 0-6 0v3l-3.5 2z" fill="currentColor"/></svg>
+    </button>
+    <button id="acceptBtn" class="call-btn green" type="button" title="Answer" aria-label="Answer">
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2" fill="currentColor"/></svg>
+    </button>
+  </div>
+
+  <div id="callPanel" class="call-panel" hidden>
+    <div class="call-stage">
+      <video id="remoteVideo" autoplay playsinline muted hidden></video>
+      <div id="remoteAvatar" class="call-avatar"></div>
+      <video id="localVideo" class="local-video" autoplay playsinline muted hidden></video>
+      <audio id="remoteAudio" autoplay></audio>
+    </div>
+    <div class="call-info"><b id="callName"></b><small id="callStatus"></small></div>
+    <div class="call-controls">
+      <button id="micToggle" class="call-btn" type="button" title="Mute microphone" aria-label="Mute microphone">
+        <svg viewBox="0 0 24 24" width="21" height="21" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path class="slash" d="M4 4l16 16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <button id="camToggle" class="call-btn" type="button" title="Turn camera on" aria-label="Camera">
+        <svg viewBox="0 0 24 24" width="21" height="21" aria-hidden="true"><rect x="3" y="6" width="13" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 10l5-3v10l-5-3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path class="slash" d="M3 4l17 16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <button id="shareToggle" class="call-btn" type="button" title="Share your screen" aria-label="Share screen">
+        <svg viewBox="0 0 24 24" width="21" height="21" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 20h8M12 16v4M12 13V7M9 10l3-3 3 3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button id="sizeToggle" class="call-btn" type="button" title="Bigger" aria-label="Change call window size">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button id="hangupBtn" class="call-btn red" type="button" title="End call" aria-label="End call">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M3 14c5-5 13-5 18 0l-2.5 2.5-3.5-2v-3a10 10 0 0 0-6 0v3l-3.5 2z" fill="currentColor"/></svg>
+      </button>
+    </div>
   </div>
 
   <div id="lightbox" class="lightbox" hidden>
@@ -118,7 +202,10 @@
     </form>
   </dialog>
 
+  <dialog id="bigDialog" class="big-dialog"><div id="bigDialogBody"></div></dialog>
+
   <div id="toasts" class="toasts" aria-live="assertive"></div>
+  <script src="/calls.js"></script>
   <script src="/app.js"></script>
 </body>
 </html>
