@@ -137,7 +137,11 @@ const appendLog = (rec) => messageLog.write(JSON.stringify(rec) + '\n');
 
 // ---------- Helpers ----------
 
-const USERNAME_RE = /^[a-z0-9][a-z0-9._-]{1,31}$/;
+// Usernames may contain letters (any language), numbers, spaces, dot, dash and underscore.
+// They are matched case-insensitively, so "Aamir Patni" and "aamir patni" are the same person.
+const USERNAME_RE = /^[\p{L}\p{N}][\p{L}\p{N} ._-]{1,31}$/u;
+const normalizeUsername = (s) => String(s || '').trim().replace(/\s+/g, ' ');
+const findUser = (u) => (Object.hasOwn(users, u) ? users[u] : null);
 const newId = () => crypto.randomBytes(12).toString('base64url');
 const sha256 = (s) => crypto.createHash('sha256').update(String(s)).digest();
 const hashToken = (t) => sha256(t).toString('hex');
@@ -161,7 +165,7 @@ const dmRoom = (a, b) => 'dm:' + [a, b].sort().join(':');
 function dmMembers(room) {
   if (typeof room !== 'string' || !room.startsWith('dm:')) return null;
   const parts = room.slice(3).split(':');
-  if (parts.length !== 2 || !parts.every((u) => users[u]) || dmRoom(parts[0], parts[1]) !== room) return null;
+  if (parts.length !== 2 || !parts.every(findUser) || dmRoom(parts[0], parts[1]) !== room) return null;
   return parts;
 }
 
@@ -449,16 +453,17 @@ async function login(req, res) {
     noteFailure(ip);
     throw httpError(403, 'Wrong team passcode');
   }
-  const username = String(body.username || '').trim().toLowerCase();
+  const typedName = normalizeUsername(body.username);
+  const username = typedName.toLowerCase();
   if (!USERNAME_RE.test(username)) {
-    throw httpError(400, 'Username: 2–32 characters, letters, numbers, dot, dash or underscore');
+    throw httpError(400, 'Username: 2–32 characters. Letters, numbers, spaces, dot, dash or underscore');
   }
   const pin = String(body.pin || '');
   if (pin.length < 4 || pin.length > 64) throw httpError(400, 'PIN must be at least 4 characters');
 
   const displayName = cleanText(body.displayName, 60);
   const title = cleanText(body.title, 60);
-  let user = users[username];
+  let user = findUser(username);
   if (user) {
     if (!safeEqual(hashPin(pin, user.salt), user.pinHash)) {
       noteFailure(ip);
@@ -469,7 +474,7 @@ async function login(req, res) {
   } else {
     const salt = crypto.randomBytes(16).toString('hex');
     user = users[username] = {
-      username, displayName: displayName || username, title, salt,
+      username, displayName: displayName || typedName, title, salt,
       pinHash: hashPin(pin, salt), createdAt: Date.now(), lastSeen: null,
     };
   }

@@ -85,7 +85,7 @@ New-NetFirewallRule -DisplayName "AI Dept Chat" -Direction Inbound -Protocol TCP
 ### 6. Everyone joins
 
 Each colleague opens the address (e.g. `http://192.168.1.20:8080`) and bookmarks it.
-The first time, they choose a **username** and **PIN** and add their name and role.
+The first time, they choose a **username** (spaces are fine, e.g. "Aamir Patni") and a **PIN**, and add their name and role.
 After that, they sign in with the same username and PIN.
 
 **Tip:** ask IT to give the server computer a **fixed IP address**, or reserve one on

@@ -17,8 +17,8 @@
       <p class="muted">Office messenger: chat and share files, images and videos over the office network.</p>
 
       <label>Username
-        <input name="username" required autocomplete="username" autocapitalize="off" spellcheck="false"
-               maxlength="32" placeholder="e.g. sara.khan">
+        <input name="username" required autocomplete="username" autocapitalize="words" spellcheck="false"
+               maxlength="32" placeholder="e.g. Aamir Patni">
       </label>
       <label>PIN
         <input name="pin" type="password" required minlength="4" maxlength="64" autocomplete="current-password" placeholder="At least 4 characters">
@@ -35,7 +35,7 @@
           <input name="title" maxlength="60" placeholder="e.g. ML Engineer">
         </label>
       </details>
-      <p class="hint">New username? Your account is created when you press the button. Next time, sign in with the same username and PIN.</p>
+      <p class="hint">Spaces are allowed, e.g. "Aamir Patni". New username? Your account is created when you press the button. Next time, sign in with the same username and PIN (capital letters don't matter).</p>
       <p id="loginError" class="error" role="alert"></p>
       <button class="btn primary" type="submit">Enter chat</button>
     </form>
